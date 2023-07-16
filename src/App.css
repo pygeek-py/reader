@@ -1,0 +1,1841 @@
+* {
+  margin: 0;
+}
+ /*----------------------------------------------------NavBar---------------------------------------*/
+
+.big {
+  display: block;
+}
+.small {
+  display: none;
+}
+.nav {
+  width: 100%;
+  height: 12vmin;
+  background-color: transparent;
+  position: fixed;
+}
+.bottomnav {
+  width: 100%;
+  height: 0.2vh;
+  background-color: rgb(231, 220, 220);
+  position: absolute;
+  bottom: 0;
+}
+.navflex {
+  width: 80%;
+  height: fit-content;
+  margin: auto;
+  margin-top: 1.3%; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navflexi {
+  width: 24%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navflexis {
+  width: 32%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav1 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+.navi {
+  width: 100%;
+  height: 6vh;
+  padding-left: 3%;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  background-color: transparent;
+  border: 1px solid rgb(231, 220, 220);
+  border-radius: 0.5rem;
+}
+.nec {
+  width: 70%;
+}
+.navi:hover {
+  border: 1px solid rgb(15, 223, 15);
+}
+.navflexii {
+  width: 22%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/*------------------------------------------------HEADER-------------------------------------------*/
+
+.bac {
+  background: url('./backgrounds/header-bg.svg');
+  background-size: cover;
+  width: 100%;
+  height: 50vh;
+  padding-top: 5%;
+  /*margin-top: 5.8%;
+  position: absolute; */
+}
+.sign1 {
+  font-size: 3.5rem;
+  font-weight: 600;
+  text-align: center;
+  padding-top: 3%;
+  opacity: 0.7;
+}
+.sign2 {
+  width: 9%;
+  font-size: 1rem;
+  font-weight: 200;
+  text-align: center;
+  padding-top: 1%;
+  opacity: 0.7;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+}
+.sign2i {
+  font-size: 1rem;
+  font-weight: 200;
+  padding-top: 2%;
+  opacity: 0.7;
+}
+.sign2s {
+  font-size: 1rem;
+  font-weight: 200;
+  text-align: center;
+  padding-top: 2%;
+  opacity: 0.7;
+  color: rgb(15, 223, 15);
+}
+
+/*---------------------------------------------SignBody---------------------------------------------*/
+
+.sig1 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  opacity: 0.8;
+}
+.signbody {
+  width: 50%;
+  height: fit-content;
+  margin: auto;
+}
+.sig2 {
+  font-size: 1.1rem;
+  font-weight: 500;
+  opacity: 0.8;
+  padding-top: 5%;
+}
+.sig3 {
+  width: 90%;
+  height: 7vh;
+  background-color: rgb(252, 248, 248);
+  padding-left: 2%;
+  margin-top: 2%;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  padding-right: 2%;
+}
+.sigb {
+  width: 23%;
+  height: 7.5vh;
+  border: none;
+  border-radius: 2rem;
+  background-color: rgb(15, 223, 15);
+  margin-top: 5%;
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 2%;
+}
+.sig4 {
+  font-size: 1rem;
+  font-weight: 600;
+  opacity: 0.9; 
+}
+.sig4i {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.9; 
+  padding-bottom: 2%;
+  cursor: pointer;
+}
+.sig4i:hover {
+  color: rgb(15, 223, 15);
+}
+
+/*-------------------------------------------FOOTER-----------------------------------------------------*/
+
+.fo1 {
+  background: url('./backgrounds/footer-bg.svg');
+  background-size: cover;
+  width: 100%;
+  height: 35vh;
+  margin-top: 4%;
+}
+.foot {
+  width: 80%;
+  height: fit-content;
+  margin: auto;
+  padding-top: 8%;
+}
+.fo2 {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.fo3 {
+  width: 10%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2%;
+}
+.fo4 {
+  width: 100%;
+  height: 0.1vh;
+  margin-top: 2%;
+  background-color: rgb(231, 220, 220);
+}
+.fas {
+  font-size: 1.2rem;
+}
+
+/*----------------------------------------------HOME-------------------------------------------*/
+
+.bacs {
+  background: url('./backgrounds/header-bg.svg');
+  background-size: cover;
+  width: 100%;
+  height: 74vh;
+  padding-top: 5%;
+}
+.hom1 {
+  width: 40%;
+  height: fit-content;
+  margin: auto;
+  padding-top: 2%;
+}
+.hom2 {
+  font-size: 3rem;
+  font-weight: 600;
+  opacity: 0.9;
+  text-align: center;
+}
+.hom3 {
+  font-size: 3rem;
+  font-weight: 600;
+  opacity: 0.9;
+  text-align: center;
+  text-decoration: underline;
+  color: rgb(15, 223, 15);
+}
+
+.hom4 {
+  width: 60%;
+  height: fit-content;
+  margin: auto;
+  margin-top: 2%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hom5 {
+  width: max-content;
+  height: 5vh;
+  background-color: transparent;
+  border: 1px solid rgb(15, 223, 15);
+  border-radius: 2rem;
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: 2%;
+  margin-left: 2%;
+  padding-left: 2%;
+  padding-right: 2%;
+  cursor: pointer;
+}
+.hom5:hover {
+  background-color: rgb(15, 223, 15);
+  border: none;
+}
+.hom5i {
+  width: 15%;
+  height: 5vh;
+  background-color: transparent;
+  border: 1px solid rgb(15, 223, 15);
+  border-radius: 2rem;
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: 1%;
+}
+.hom5ii {
+  width: 22%;
+  height: 5vh;
+  background-color: transparent;
+  border: 1px solid rgb(15, 223, 15);
+  border-radius: 2rem;
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: 1%;
+}
+.hom5iii {
+  width: 18%;
+  height: 5vh;
+  background-color: transparent;
+  border: 1px solid rgb(15, 223, 15);
+  border-radius: 2rem;
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: 1%;
+}
+.hom5iv {
+  width: 30%;
+  height: 5vh;
+  background-color: transparent;
+  border: 1px solid rgb(15, 223, 15);
+  border-radius: 2rem;
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: 2%;
+  margin-left: 20%;
+}
+.hom7 {
+  width: 35%;
+  margin: auto;
+  display: flex;
+}
+.hom5s {
+  width: 15%;
+  height: 5vh;
+  background-color: transparent;
+  border: 1px solid rgb(15, 223, 15);
+  border-radius: 2rem;
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: 2%;
+  margin-left: 2%;
+}
+.hom5ss {
+  width: 18%;
+  height: 5vh;
+  background-color: transparent;
+  border: 1px solid rgb(15, 223, 15);
+  border-radius: 2rem;
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: 2%;
+  margin-left: 2%;
+}
+
+/*------------------------------------------HOMEBODY------------------------------------------*/
+
+.bod1 {
+  width: 60%;
+  height: fit-content;
+  margin: auto;
+  margin-top: 3%;
+}
+.bodh {
+  font-size: 1.2rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+.bodl {
+  width: 8%;
+  height: 0.3vh;
+  background-color: rgb(15, 223, 15);
+  margin-top: 1%;
+}
+.sec {
+  width: 100%;
+  height: fit-content;
+  box-shadow: 5px 10px 15px rgb(248, 248, 248);
+  margin-bottom: 5%;
+  border-radius: 1rem;
+}
+.secin {
+  width: 96%;
+  height: fit-content;
+  padding: 2%;
+}
+.sec1 {
+  font-size: 1.2rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+.sec2 {
+  width: 20%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1%;
+}
+.sec2n {
+  width: 12%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1%;
+}
+.sec3 {
+  font-size: 0.8rem;
+  font-weight: 400;
+  opacity: 0.6;
+}
+.secb {
+  width: max-content;
+  height: 4vh;
+  border: 1px solid rgb(231, 220, 220);
+  background: transparent;
+  font-size: 0.8rem;
+  border-radius: 2rem;
+  font-weight: 100;
+  opacity: 0.6;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 3%;
+}
+.secb:hover {
+  background-color: rgb(15, 223, 15);
+  border: none;
+}
+.sec4 {
+  opacity: 0.6;
+  font-weight: 100;
+  font-size: 1.3rem;
+}
+.sec5 {
+  font-size: 1.1rem;
+  font-weight: 200;
+  opacity: 0.8;
+  padding-top: 1%;
+}
+.secbs {
+  width: 15%;
+  height: 6vh;
+  border: 1px solid rgb(15, 223, 15);
+  background: transparent;
+  font-size: 1.1rem;
+  border-radius: 2rem;
+  font-weight: 100;
+  opacity: 0.6;
+  margin-top: 3%;
+  color: rgb(15, 223, 15);
+  cursor: pointer;
+}
+.secbs:hover {
+  background-color: rgb(15, 223, 15);
+  border: none;
+  color: white;
+}
+.secpage {
+  width: 35%;
+  height: fit-content;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 3%;
+}
+.sec6 {
+  width: 23%;
+  height: 7vh;
+  border: 1px solid rgb(15, 223, 15);
+  background: transparent;
+  border-radius: 50%;
+  margin-right: 4%;
+  font-size: 1rem;
+  color: rgb(15, 223, 15);
+}
+.sec6:hover {
+  border: none;
+  background: rgb(15, 223, 15);
+  color: white;
+  cursor: pointer;
+}
+.sec6i {
+  width: 23%;
+  height: 7vh;
+  border: none;
+  background: rgb(15, 223, 15);
+  border-radius: 50%;
+  margin-right: 4%;
+  font-size: 1rem;
+  color: white;
+}
+
+/*------------------------------------------About------------------------------------------------*/
+
+.ab1 {
+  background: url('./backgrounds/header-bg.svg');
+  background-size: cover;
+  width: 100%;
+  height: 65vh;
+  padding-top: 5%;
+}
+.ab2 {
+  width: 50%;
+  margin: auto;
+  padding-top: 1%;
+}
+.sec2i {
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1%;
+}
+.sec3i {
+  font-size: 1rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+.secbi {
+  width: max-content;
+  height: 4vh;
+  border: 1px solid rgb(231, 220, 220);
+  background: transparent;
+  font-size: 1rem;
+  border-radius: 2rem;
+  font-weight: 100;
+  opacity: 0.6;
+  padding-left: 5%;
+  padding-right: 5%;
+  margin-top: 3%;
+}
+.secbi:hover {
+  background-color: rgb(15, 223, 15);
+  border: none;
+}
+.sec4i {
+  opacity: 0.6;
+  font-weight: 100;
+  font-size: 1.3rem;
+}
+.sec1i {
+  font-size: 3rem;
+  font-weight: 500;
+  opacity: 0.8;
+}
+.sec5i {
+  font-size: 1.2rem;
+  font-weight: 200;
+  opacity: 0.8;
+  padding-top: 1%;
+}
+.ab3 {
+  width: 50%;
+  margin: auto;
+}
+.ab4 {
+  width: 100%;
+  height: fit-content;
+  box-shadow: 5px 10px 15px rgb(248, 248, 248);
+  border-radius: 0.5rem;
+  margin-bottom: 3%;
+}
+.ab5 {
+  width: 96%;
+  height: fit-content;
+  padding: 2%;
+}
+.ab6 {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.9;
+  color: rgb(240, 160, 13);
+}
+.ab6i {
+  font-size: 1rem;
+  font-weight: 100;
+  opacity: 0.7;
+  color: rgb(240, 160, 13);
+}
+.ab7 {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.9;
+  color: rgb(243, 38, 38);
+}
+.ab7i {
+  font-size: 1rem;
+  font-weight: 100;
+  opacity: 0.7;
+  color: rgb(243, 38, 38);
+}
+.ab8 {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.9;
+  color: black;
+}
+.ab8i {
+  font-size: 1rem;
+  font-weight: 100;
+  opacity: 0.7;
+  color: black;
+}
+.ab9 {
+  font-size: 1rem;
+  font-weight: 400;
+  opacity: 0.7;
+  color: black;
+}
+.ab9i {
+  font-size: 1rem;
+  font-weight: 100;
+  opacity: 0.7;
+  color: black;
+}
+.secbsi {
+  width: 20%;
+  height: 6vh;
+  border: 1px solid rgb(15, 223, 15);
+  background: transparent;
+  font-size: 1.1rem;
+  border-radius: 2rem;
+  font-weight: 100;
+  opacity: 0.6;
+  margin-top: 3%;
+  color: rgb(15, 223, 15);
+  cursor: pointer;
+}
+
+/*------------------------------------------AUTHORS---------------------------------------------*/
+
+.au1 {
+  width: 75%;
+  height: fit-content;
+  margin: auto;
+  margin-top: 4%;
+  margin-bottom: 4%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.au2 {
+  width: 32%;
+  height: fit-content;
+  padding-bottom: 3%;
+}
+.au3 {
+  width: 70%;
+  height: 30vh;
+  border: 1px solid rgb(15, 223, 15);
+  border-radius: 50%;
+  background: black;
+  margin: auto;
+}
+.au4 {
+  font-size: 2rem;
+  font-weight: 600;
+  opacity: 0.8;
+  text-align: center;
+}
+.fo3i {
+  width: 35%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2%;
+  margin: auto;
+
+}
+.fasi {
+  font-size: 1.7rem;
+  opacity: 0.5;
+}
+.au5 {
+  font-size: 1.2rem;
+  font-weight: 100;
+  opacity: 0.5;
+  cursor: pointer;
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+.au5i {
+  font-size: 1.2rem;
+  font-weight: 400;
+  opacity: 0.5;
+  color: rgb(15, 223, 15);
+  cursor: pointer;
+  text-align: center;
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+.au5:hover {
+  color: rgb(15, 223, 15);
+}
+.au6 {
+  width: 50%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  margin-top: 2%;
+}
+.au3i {
+  width: 30%;
+  height: 30vh;
+  border: 1px solid rgb(15, 223, 15);
+  border-radius: 50%;
+  background: black;
+}
+.au4i {
+  font-size: 2rem;
+  font-weight: 600;
+  opacity: 0.8;
+}
+.fo3ii {
+  width: 35%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 2%;
+
+}
+.au5ii {
+  font-size: 1.2rem;
+  font-weight: 100;
+  opacity: 0.5;
+  cursor: pointer;
+}
+.au5is {
+  font-size: 1.2rem;
+  font-weight: 400;
+  opacity: 0.5;
+  color: rgb(15, 223, 15);
+  cursor: pointer;
+}
+.au5ii:hover {
+  color: rgb(15, 223, 15);
+}
+.au7 {
+  margin-left: 4%;
+  margin-top: 2%;
+  width: 45%;
+}
+.bod1i {
+  width: 60%;
+  height: fit-content;
+  margin: auto;
+  margin-top: 3%;
+}
+
+/*------------------------------------------MYBOOKS------------------------------------------------*/
+
+.my1 {
+  width: 80%;
+  height: fit-content;
+  margin: auto;
+  padding-top: 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.my2 {
+  width: 68%;
+  height: fit-content;
+}
+.my3 {
+  font-size: 2.3rem;
+  font-weight: 700;
+  opacity: 0.9;
+}
+.my3i {
+  font-size: 2.3rem;
+  font-weight: 700;
+  opacity: 0.9;
+  color: rgb(15, 223, 15);
+  text-decoration: underline;
+}
+.my4 {
+  width: 100%;
+  height: fit-content;
+  box-shadow: 5px 10px 15px rgb(248, 248, 248);
+  margin-top: 3%;
+}
+.my5 {
+  width: 96%;
+  height: fit-content;
+  padding: 3%;
+}
+.my2s {
+  width: 30%;
+  height: fit-content;
+}
+.my6 {
+  width: 100%;
+  height: fit-content;
+  box-shadow: 5px 10px 15px rgb(248, 248, 248);
+}
+.my7 {
+  width: 100%;
+  height: 0.7vh;
+  background-color: rgb(15, 223, 15);
+}
+.ned {
+  width: 96%;
+  padding: 2%;
+}
+.myi {
+  width: 95%;
+  height: 6vh;
+  border: 1px solid rgb(231, 220, 220);
+  border-radius: 2rem;
+  background-color: transparent;
+  padding-left: 4%;
+  font-size: 0.9rem;
+  margin-top: 5%;
+}
+.myb {
+  width: 99%;
+  height: 7vh;
+  border: none;
+  border-radius: 2rem;
+  background-color: rgb(15, 223, 15);
+  padding-left: 4%;
+  font-size: 1rem;
+  color: white;
+  margin-top: 5%;
+  margin-bottom: 3%;
+}
+.my6i {
+  width: 100%;
+  height: fit-content;
+  box-shadow: 5px 10px 15px rgb(248, 248, 248);
+}
+.my7 {
+  width: 100%;
+  height: 0.7vh;
+  background-color: rgb(15, 223, 15);
+}
+.ned {
+  width: 96%;
+  padding: 2%;
+}
+.fos {
+  width: 84%;
+  height: fit-content;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: auto;
+  margin-top: 3%;
+}
+.fasi {
+  font-size: 1.8rem;
+  padding-bottom: 7%;
+}
+.hom4i {
+  width: 92%;
+  height: fit-content;
+  margin-top: 2%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.hom5i {
+  width: max-content;
+  height: 5vh;
+  background-color: transparent;
+  border: 1px solid rgb(15, 223, 15);
+  border-radius: 2rem;
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-top: 2%;
+  margin-left: 2%;
+  padding-left: 4%;
+  padding-right: 4%;
+  cursor: pointer;
+}
+.hom5i:hover {
+  background-color: rgb(15, 223, 15);
+  border: none;
+  color: white;
+}
+.my1i {
+  width: 80%;
+  height: fit-content;
+  margin: auto;
+  padding-top: 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+/*----------------------------------------------SEARCH----------------------------------------------*/
+
+.des {
+  font-size: 2.4rem;
+  font-weight: 600;
+  opacity: 0.9;
+}
+.desi {
+  font-size: 2.4rem;
+  font-weight: 600;
+  opacity: 0.9;
+  text-decoration: underline;
+  color: rgb(15, 223, 15);
+}
+.se1 {
+  width: 70%;
+  height: fit-content;
+  margin: auto;
+  padding-top: 9%;
+}
+
+
+@media only screen and (max-width:600px) {
+  /*----------------------------------------------------NavBar---------------------------------------*/
+
+  .big {
+    display: none;
+  }
+  .small {
+    display: block;
+  }
+  .nav {
+    width: 100%;
+    height: fit-content;
+    background-color: white;
+    position: fixed;
+    padding-bottom: 3%;
+    z-index: 1;
+  }
+  .bottomnav {
+    width: 100%;
+    height: 0.2vh;
+    background-color: rgb(231, 220, 220);
+    position: absolute;
+    bottom: 0;
+  }
+  .navflex {
+    width: 96%;
+    height: fit-content;
+    margin: auto;
+    margin-top: 4%; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .navflexi {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    transition: width 2s;
+  }
+  .navflexis {
+    width: 32%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .nav1 {
+    font-size: 1.4rem;
+    font-weight: 100;
+    opacity: 0.8;
+  }
+  .navi {
+    width: 90%;
+    height: 6vh;
+    padding-left: 3%;
+    font-size: 1rem;
+    opacity: 0.6;
+    background-color: transparent;
+    border: 1px solid rgb(231, 220, 220);
+    border-radius: 0.5rem;
+  }
+  .nec {
+    width: 70%;
+  }
+  .navi:hover {
+    border: 1px solid rgb(15, 223, 15);
+  }
+  .sa {
+    width: 35%;
+    height: 5vh;
+    border: none;
+    border-radius: 0.5rem;
+    background-color: rgb(231, 220, 220);
+    font-size: 1.1rem;
+    opacity: 0.3;
+    font-weight: 100;
+  }
+  .sa1 {
+    font-size: 1.3rem;
+    font-weight: 100;
+    opacity: 0.5;
+  }
+  .navflexii {
+    width: 38%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 4%;
+  }
+  .navflexiii {
+    width: 42%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 4%;
+  }
+  /*------------------------------------------------HEADER-------------------------------------------*/
+
+  .bac {
+    background: url('./backgrounds/header-bg.svg');
+    background-size: cover;
+    width: 100%;
+    height: 35vh;
+    padding-top: 40%;
+    /*margin-top: 5.8%;
+    position: absolute; */
+  }
+  .sign1 {
+    font-size: 3.5rem;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 3%;
+    opacity: 0.7;
+  }
+  .sign2 {
+    width: 30%;
+    font-size: 1rem;
+    font-weight: 200;
+    text-align: center;
+    padding-top: 1%;
+    opacity: 0.7;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+  }
+  .sign2i {
+    font-size: 1rem;
+    font-weight: 200;
+    padding-top: 2%;
+    opacity: 0.7;
+  }
+  .sign2s {
+    font-size: 1rem;
+    font-weight: 200;
+    text-align: center;
+    padding-top: 2%;
+    opacity: 0.7;
+    color: rgb(15, 223, 15);
+  }
+  /*---------------------------------------------SignBody---------------------------------------------*/
+
+  .sig1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    opacity: 0.8;
+  }
+  .signbody {
+    width: 96%;
+    height: fit-content;
+    padding-left: 2%;
+  }
+  .sig2 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    opacity: 0.8;
+    padding-top: 5%;
+  }
+  .sig3 {
+    width: 90%;
+    height: 7vh;
+    background-color: rgb(252, 248, 248);
+    padding-left: 2%;
+    margin-top: 2%;
+    border: none;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    padding-right: 2%;
+  }
+  .sigb {
+    width: 35%;
+    height: 6vh;
+    border: none;
+    border-radius: 2rem;
+    background-color: rgb(15, 223, 15);
+    margin-top: 5%;
+    font-size: 1rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 2%;
+  }
+  .sig4 {
+    font-size: 1rem;
+    font-weight: 600;
+    opacity: 0.9; 
+  }
+  .sig4i {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.9; 
+    padding-bottom: 2%;
+    cursor: pointer;
+  }
+  .sig4i:hover {
+    color: rgb(15, 223, 15);
+  }
+  /*-------------------------------------------FOOTER-----------------------------------------------------*/
+
+  .fo1 {
+    background: url('./backgrounds/footer-bg.svg');
+    background-size: cover;
+    width: 100%;
+    height: 20vh;
+    margin-top: 4%;
+  }
+  .foot {
+    width: 80%;
+    height: fit-content;
+    margin: auto;
+    padding-top: 11%;
+  }
+  .fo2 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .fo3 {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2%;
+  }
+  .fo4 {
+    width: 100%;
+    height: 0.1vh;
+    margin-top: 2%;
+    background-color: rgb(231, 220, 220);
+  }
+  .fas {
+    font-size: 1.4rem;
+  }
+
+  /*----------------------------------------------HOME-------------------------------------------*/
+
+  .bacs {
+    background: url('./backgrounds/header-bg.svg');
+    background-size: cover;
+    width: 100%;
+    height: fit-content;
+    padding-top: 5%;
+    padding-bottom: 4%;
+  }
+  .hom1 {
+    width: 96%;
+    height: fit-content;
+    margin: auto;
+    padding-top: 17%;
+  }
+  .hom2 {
+    font-size: 3rem;
+    font-weight: 600;
+    opacity: 0.9;
+    text-align: center;
+  }
+  .hom3 {
+    font-size: 3rem;
+    font-weight: 600;
+    opacity: 0.9;
+    text-align: center;
+    text-decoration: underline;
+    color: rgb(15, 223, 15);
+  }
+
+  .hom4 {
+    width: 98%;
+    height: fit-content;
+    margin: auto;
+    margin-top: 2%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hom5 {
+    width: max-content;
+    height: 5vh;
+    background-color: transparent;
+    border: 1px solid rgb(15, 223, 15);
+    border-radius: 2rem;
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-top: 2%;
+    margin-left: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+    cursor: pointer;
+  }
+  .hom5:hover {
+    background-color: rgb(15, 223, 15);
+    border: none;
+  }
+  .hom5i {
+    width: 15%;
+    height: 5vh;
+    background-color: transparent;
+    border: 1px solid rgb(15, 223, 15);
+    border-radius: 2rem;
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-top: 1%;
+  }
+  .hom5ii {
+    width: 22%;
+    height: 5vh;
+    background-color: transparent;
+    border: 1px solid rgb(15, 223, 15);
+    border-radius: 2rem;
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-top: 1%;
+  }
+  .hom5iii {
+    width: 18%;
+    height: 5vh;
+    background-color: transparent;
+    border: 1px solid rgb(15, 223, 15);
+    border-radius: 2rem;
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-top: 1%;
+  }
+  .hom5iv {
+    width: 30%;
+    height: 5vh;
+    background-color: transparent;
+    border: 1px solid rgb(15, 223, 15);
+    border-radius: 2rem;
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-top: 2%;
+    margin-left: 20%;
+  }
+  .hom7 {
+    width: 35%;
+    margin: auto;
+    display: flex;
+  }
+  .hom5s {
+    width: 15%;
+    height: 5vh;
+    background-color: transparent;
+    border: 1px solid rgb(15, 223, 15);
+    border-radius: 2rem;
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-top: 2%;
+    margin-left: 2%;
+  }
+  .hom5ss {
+    width: 18%;
+    height: 5vh;
+    background-color: transparent;
+    border: 1px solid rgb(15, 223, 15);
+    border-radius: 2rem;
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-top: 2%;
+    margin-left: 2%;
+  }
+
+  /*------------------------------------------HOMEBODY------------------------------------------*/
+
+  .bod1 {
+    width: 96%;
+    height: fit-content;
+    margin: auto;
+    margin-top: 3%;
+  }
+  .bodh {
+    font-size: 1.2rem;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+  .bodl {
+    width: 18%;
+    height: 0.3vh;
+    background-color: rgb(15, 223, 15);
+    margin-top: 1%;
+  }
+  .sec {
+    width: 100%;
+    height: fit-content;
+    box-shadow: 5px 10px 15px rgb(248, 248, 248);
+    margin-bottom: 5%;
+    border-radius: 1rem;
+  }
+  .secin {
+    width: 96%;
+    height: fit-content;
+    padding: 2%;
+  }
+  .sec1 {
+    font-size: 1.2rem;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  .sec2 {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1%;
+  }
+  .sec2n {
+    width: 12%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1%;
+  }
+  .sec3 {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.6;
+  }
+  .secb {
+    width: max-content;
+    height: 4vh;
+    border: 1px solid rgb(231, 220, 220);
+    background: transparent;
+    font-size: 1rem;
+    border-radius: 2rem;
+    font-weight: 100;
+    opacity: 0.6;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 3%;
+  }
+  .secb:hover {
+    background-color: rgb(15, 223, 15);
+    border: none;
+  }
+  .sec4 {
+    opacity: 0.6;
+    font-weight: 100;
+    font-size: 1.3rem;
+  }
+  .sec5 {
+    font-size: 1.1rem;
+    font-weight: 200;
+    opacity: 0.8;
+    padding-top: 1%;
+  }
+  .secbs {
+    width: 30%;
+    height: 6vh;
+    border: 1px solid rgb(15, 223, 15);
+    background: transparent;
+    font-size: 1.1rem;
+    border-radius: 2rem;
+    font-weight: 100;
+    opacity: 0.6;
+    margin-top: 3%;
+    color: rgb(15, 223, 15);
+    cursor: pointer;
+  }
+  .secbs:hover {
+    background-color: rgb(15, 223, 15);
+    border: none;
+    color: white;
+  }
+  .secpage {
+    width: 85%;
+    height: fit-content;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3%;
+  }
+  .sec6 {
+    width: 23%;
+    height: 7vh;
+    border: 1px solid rgb(15, 223, 15);
+    background: transparent;
+    border-radius: 50%;
+    margin-right: 4%;
+    font-size: 1rem;
+    color: rgb(15, 223, 15);
+  }
+  .sec6:hover {
+    border: none;
+    background: rgb(15, 223, 15);
+    color: white;
+    cursor: pointer;
+  }
+  .sec6i {
+    width: 23%;
+    height: 7vh;
+    border: none;
+    background: rgb(15, 223, 15);
+    border-radius: 50%;
+    margin-right: 4%;
+    font-size: 1rem;
+    color: white;
+  }
+
+  /*------------------------------------------About------------------------------------------------*/
+
+  .ab1 {
+    background: url('./backgrounds/header-bg.svg');
+    background-size: cover;
+    width: 100%;
+    height: 65vh;
+    padding-top: 5%;
+  }
+  .ab2 {
+    width: 96%;
+    margin: auto;
+    padding-top: 10%;
+  }
+  .sec2i {
+    width: 30%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1%;
+  }
+  .sec3i {
+    font-size: 1rem;
+    font-weight: 500;
+    opacity: 0.9;
+  }
+  .secbi {
+    width: max-content;
+    height: 4vh;
+    border: 1px solid rgb(231, 220, 220);
+    background: transparent;
+    font-size: 1rem;
+    border-radius: 2rem;
+    font-weight: 100;
+    opacity: 0.6;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 3%;
+  }
+  .secbi:hover {
+    background-color: rgb(15, 223, 15);
+    border: none;
+  }
+  .sec4i {
+    opacity: 0.6;
+    font-weight: 100;
+    font-size: 1.3rem;
+  }
+  .sec1i {
+    font-size: 3rem;
+    font-weight: 500;
+    opacity: 0.8;
+  }
+  .sec5i {
+    font-size: 1.2rem;
+    font-weight: 200;
+    opacity: 0.8;
+    padding-top: 1%;
+  }
+  .ab3 {
+    width: 96%;
+    margin: auto;
+  }
+  .ab4 {
+    width: 100%;
+    height: fit-content;
+    box-shadow: 5px 10px 15px rgb(248, 248, 248);
+    border-radius: 0.5rem;
+    margin-bottom: 3%;
+  }
+  .ab5 {
+    width: 96%;
+    height: fit-content;
+    padding: 2%;
+  }
+  .ab6 {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.9;
+    color: rgb(240, 160, 13);
+  }
+  .ab6i {
+    font-size: 1rem;
+    font-weight: 100;
+    opacity: 0.7;
+    color: rgb(240, 160, 13);
+  }
+  .ab7 {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.9;
+    color: rgb(243, 38, 38);
+  }
+  .ab7i {
+    font-size: 1rem;
+    font-weight: 100;
+    opacity: 0.7;
+    color: rgb(243, 38, 38);
+  }
+  .ab8 {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.9;
+    color: black;
+  }
+  .ab8i {
+    font-size: 1rem;
+    font-weight: 100;
+    opacity: 0.7;
+    color: black;
+  }
+  .ab9 {
+    font-size: 1rem;
+    font-weight: 400;
+    opacity: 0.7;
+    color: black;
+  }
+  .ab9i {
+    font-size: 1rem;
+    font-weight: 100;
+    opacity: 0.7;
+    color: black;
+  }
+  .secbsi {
+    width: 33%;
+    height: 6vh;
+    border: 1px solid rgb(15, 223, 15);
+    background: transparent;
+    font-size: 1.1rem;
+    border-radius: 2rem;
+    font-weight: 100;
+    opacity: 0.6;
+    margin-top: 3%;
+    color: rgb(15, 223, 15);
+    cursor: pointer;
+  }
+  /*------------------------------------------AUTHORS---------------------------------------------*/
+
+  .bacd {
+    background: url('./backgrounds/header-bg.svg');
+    background-size: cover;
+    width: 100%;
+    height: 60vh;
+    padding-top: 25%;
+    /*margin-top: 5.8%;
+    position: absolute; */
+  }
+  .au1 {
+    width: 96%;
+    height: fit-content;
+    margin: auto;
+    margin-top: 4%;
+    margin-bottom: 4%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .au2 {
+    width: 96%;
+    height: fit-content;
+    padding-bottom: 3%;
+  }
+  .au3 {
+    width: 70%;
+    height: 30vh;
+    border: 1px solid rgb(15, 223, 15);
+    border-radius: 50%;
+    background: black;
+    margin: auto;
+  }
+  .au4 {
+    font-size: 2rem;
+    font-weight: 600;
+    opacity: 0.8;
+    text-align: center;
+  }
+  .fo3i {
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2%;
+    margin: auto;
+
+  }
+  .fasi {
+    font-size: 1.7rem;
+    opacity: 0.5;
+  }
+  .au5 {
+    font-size: 1.2rem;
+    font-weight: 100;
+    opacity: 0.5;
+    cursor: pointer;
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+  }
+  .au5i {
+    font-size: 1.2rem;
+    font-weight: 400;
+    opacity: 0.5;
+    color: rgb(15, 223, 15);
+    cursor: pointer;
+    text-align: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+  }
+  .au5:hover {
+    color: rgb(15, 223, 15);
+  }
+  .au6 {
+    width: 98%;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: auto;
+    margin-top: 1%;
+  }
+  .au3i {
+    width: 70%;
+    height: 30vh;
+    border: 1px solid rgb(15, 223, 15);
+    border-radius: 50%;
+    background: black;
+  }
+  .au4i {
+    font-size: 2rem;
+    font-weight: 600;
+    opacity: 0.8;
+    text-align: center;
+  }
+  .fo3ii {
+    width: 35%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 2%;
+    margin: auto;
+
+  }
+  .au5ii {
+    font-size: 1.2rem;
+    font-weight: 100;
+    opacity: 0.5;
+    cursor: pointer;
+    text-align: center;
+  }
+  .au5is {
+    font-size: 1.2rem;
+    font-weight: 400;
+    opacity: 0.5;
+    color: rgb(15, 223, 15);
+    cursor: pointer;
+    text-align: center;
+  }
+  .au5ii:hover {
+    color: rgb(15, 223, 15);
+  }
+  .au7 {
+    width: 80%;
+    
+  }
+  .bod1i {
+    width: 96%;
+    height: fit-content;
+    margin: auto;
+    margin-top: 3%;
+  }
+  /*------------------------------------------MYBOOKS------------------------------------------------*/
+
+  .my1 {
+    width: 96%;
+    height: fit-content;
+    margin: auto;
+    padding-top: 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .my2 {
+    width: 98%;
+    height: fit-content;
+    padding-top: 11%;
+  }
+  .my3 {
+    font-size: 2.3rem;
+    font-weight: 700;
+    opacity: 0.9;
+  }
+  .my3i {
+    font-size: 2.3rem;
+    font-weight: 700;
+    opacity: 0.9;
+    color: rgb(15, 223, 15);
+    text-decoration: underline;
+  }
+  .my4 {
+    width: 100%;
+    height: fit-content;
+    box-shadow: 5px 10px 15px rgb(248, 248, 248);
+    margin-top: 3%;
+  }
+  .my5 {
+    width: 96%;
+    height: fit-content;
+    padding: 3%;
+  }
+  .my2s {
+    width: 98%;
+    height: fit-content;
+    margin-top: 6%;
+  }
+  .my6 {
+    width: 100%;
+    height: fit-content;
+    box-shadow: 5px 10px 15px rgb(248, 248, 248);
+  }
+  .my7 {
+    width: 100%;
+    height: 0.7vh;
+    background-color: rgb(15, 223, 15);
+  }
+  .ned {
+    width: 96%;
+    padding: 2%;
+  }
+  .myi {
+    width: 95%;
+    height: 6vh;
+    border: 1px solid rgb(231, 220, 220);
+    border-radius: 2rem;
+    background-color: transparent;
+    padding-left: 4%;
+    font-size: 0.9rem;
+    margin-top: 5%;
+  }
+  .myb {
+    width: 99%;
+    height: 7vh;
+    border: none;
+    border-radius: 2rem;
+    background-color: rgb(15, 223, 15);
+    padding-left: 4%;
+    font-size: 1rem;
+    color: white;
+    margin-top: 5%;
+    margin-bottom: 3%;
+  }
+  .my6i {
+    width: 100%;
+    height: fit-content;
+    box-shadow: 5px 10px 15px rgb(248, 248, 248);
+  }
+  .my7 {
+    width: 100%;
+    height: 0.7vh;
+    background-color: rgb(15, 223, 15);
+  }
+  .ned {
+    width: 96%;
+    padding: 2%;
+  }
+  .fos {
+    width: 84%;
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    margin-top: 3%;
+  }
+  .fasi {
+    font-size: 1.8rem;
+    padding-bottom: 7%;
+  }
+  .hom4i {
+    width: 92%;
+    height: fit-content;
+    margin-top: 2%;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .hom5i {
+    width: max-content;
+    height: 5vh;
+    background-color: transparent;
+    border: 1px solid rgb(15, 223, 15);
+    border-radius: 2rem;
+    font-size: 1rem;
+    opacity: 0.8;
+    margin-top: 2%;
+    margin-left: 2%;
+    padding-left: 4%;
+    padding-right: 4%;
+    cursor: pointer;
+  }
+  .hom5i:hover {
+    background-color: rgb(15, 223, 15);
+    border: none;
+    color: white;
+  }
+  .my1i {
+    width: 98%;
+    height: fit-content;
+    margin: auto;
+    padding-top: 11%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  /*----------------------------------------------SEARCH----------------------------------------------*/
+
+  .des {
+    font-size: 2.4rem;
+    font-weight: 600;
+    opacity: 0.9;
+  }
+  .desi {
+    font-size: 2.4rem;
+    font-weight: 600;
+    opacity: 0.9;
+    text-decoration: underline;
+    color: rgb(15, 223, 15);
+  }
+  .se1 {
+    width: 98%;
+    height: fit-content;
+    margin: auto;
+    padding-top: 18%;
+  }
+  .mig {
+    width: 90%;
+    height: 55vh;
+  }
+
+}
