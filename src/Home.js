@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 const Home = () => {
 
   const token = JSON.parse(localStorage.getItem('names'))
+  const wat = token.toUpperCase()
 
   const fic = () => {
     window.location = "/gen/fiction"
@@ -22,7 +23,7 @@ const Home = () => {
         <div className='bacs'>
           <div className='hom1'>
             <h1 className='hom2'>What Book Would You Like To Borrow Today?</h1>
-            <h1 className='hom3'>{token}</h1>
+            <h1 className='hom3'>{wat}</h1>
           </div>
           <div className='hom4'>
             <button className='hom5' onClick={fic}>Fiction</button>

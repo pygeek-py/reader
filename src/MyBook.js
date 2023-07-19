@@ -6,6 +6,7 @@ import Footer from './components/Footer'
 const MyBook = () => {
 
     const token = JSON.parse(localStorage.getItem('ids'))
+    const tokens = JSON.parse(localStorage.getItem('names'))
 
     const[keep, setKeep] = useState([])
     const[sea, setSea] = useState("")
@@ -41,7 +42,7 @@ const MyBook = () => {
         <HomeNav />
         <div className='my1'>
             <div className='my2'>
-                <h1 className='my3'>Books Borrowed By Mick off</h1>
+                <h1 className='my3'>Books Borrowed By {tokens}</h1>
                 {keep.map((item) => 
                     <div className='my4'>
                         <div className='my5'>
