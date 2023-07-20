@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import logo from '../logo.png'
-import { FaBars, FaSearch } from 'react-icons/fa'
+import { FaBars, FaSearch, FaTimes } from 'react-icons/fa'
 
 const HomeNav = () => {
 
@@ -37,7 +37,19 @@ const HomeNav = () => {
     const[vas, setVas] = useState(false)
 
     const dis = () => {
-        setVa(true)
+        if (va == false) {
+            setVa(true)
+            let a = document.querySelector('.sa1');
+            a.style.display = "none";
+            let b = document.querySelector('.sa1s');
+            b.style.display = "block";
+        } else {
+            setVa(false)
+            let a = document.querySelector('.sa1');
+            a.style.display = "block";
+            let b = document.querySelector('.sa1s');
+            b.style.display = "none";
+        }
         console.log('hello')
     }
 
@@ -83,6 +95,7 @@ const HomeNav = () => {
                             <h1 className='nav1' onClick={out}>Logout</h1>
                             <button className='sa' onClick={val}><FaSearch /></button>
                             <h1 className='sa1' onClick={dis}><FaBars /></h1>
+                            <h1 className='sa1s' onClick={dis}><FaTimes /></h1>
                         </div>
                     )}
                     

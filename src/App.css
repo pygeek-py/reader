@@ -982,6 +982,12 @@
     font-weight: 100;
     opacity: 0.5;
   }
+  .sa1s {
+    font-size: 1.3rem;
+    font-weight: 100;
+    opacity: 0.5;
+    display: none;
+  }
   .navflexii {
     width: 38%;
     height: fit-content;

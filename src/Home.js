@@ -6,7 +6,7 @@ import Footer from './components/Footer'
 const Home = () => {
 
   const token = JSON.parse(localStorage.getItem('names'))
-  const wat = token.toUpperCase()
+  
 
   const fic = () => {
     window.location = "/gen/fiction"
@@ -17,6 +17,7 @@ const Home = () => {
   }
 
   if (token) {
+    const wat = token.toUpperCase()
     return (
       <div>
         <HomeNav />
