@@ -10,6 +10,7 @@ const Signup = () => {
   const[pass, setPass] = useState("")
   const[va, setVa] = useState(false)
   const[vas, setVas] = useState(false)
+  const[checking, setChecking] = useState(false)
 
   const styles = {
     h: {
@@ -20,6 +21,7 @@ const Signup = () => {
   const sign = async () => {
     if (`${password}` === `${pass}`) {
       const url = 'https://readerapi.onrender.com/signup/'
+      setChecking(true)
 
       const response = await fetch(url, {
         method: 'POST',
@@ -38,6 +40,7 @@ const Signup = () => {
         window.location = '/signin'
       } else {
         setVa(true)
+        setChecking(false)
       }
     }
     else {
@@ -100,7 +103,11 @@ const Signup = () => {
             ) : (
               <h1 style={styles.h}>two</h1>
             )}
-            <button className='sigb' onClick={sign}>SIGN UP</button>
+            {checking ? (
+              <button className='sigb' onClick={sign}>SIGNING UP..</button>
+            ) : (
+              <button className='sigb' onClick={sign}>SIGN UP</button>
+            )}
             <h1 className='sig4'>Already Have An Account? <span className='sig4i' onClick={log}>Log In Instead</span></h1>
         </div>
         <Footer />

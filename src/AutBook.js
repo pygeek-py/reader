@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import HomeNav from './components/HomeNav'
 import { FaTwitter, FaInstagram, FaDiscord } from 'react-icons/fa'
+import {
+    UserCircleIcon,
+    UserIcon
+} from "@heroicons/react/24/outline";
 
 const AutBook = ({ match }) => {
 
@@ -51,10 +55,10 @@ const AutBook = ({ match }) => {
         <HomeNav />
         <div className='bacd'>
             <div className='au6'>
-                <div className='au3i'></div>
+                <UserCircleIcon className='usercircle' />
                 <div className='au7'>
                     <h1 className='au4i'>{name}</h1>
-                    <h1 className='au5ii'><span className='au5is'>1</span> Books by this author</h1>
+                    <h1 className='au5ii'><span className='au5is'>{keep.length}</span> Books by this author</h1>
                     <div className='fo3ii'>
                         <h1 className='fasi'>
                             <FaTwitter />

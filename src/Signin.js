@@ -7,6 +7,7 @@ const Signin = () => {
   const[name, setName] = useState("")
   const[pass, setPass] = useState("")
   const[va, setVa] = useState(false)
+  const[checking, setChecking] = useState(false)
 
   const styles = {
     h: {
@@ -16,6 +17,7 @@ const Signin = () => {
 
   const signins = async () => {
     const url = 'https://readerapi.onrender.com/signin/'
+    setChecking(true)
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -35,6 +37,7 @@ const Signin = () => {
       localStorage.setItem('names', JSON.stringify(data.username));
     } else {
       setVa(true)
+      setChecking(false)
     }
   }
 
@@ -75,7 +78,12 @@ const Signin = () => {
             ) : (
               <h1 style={styles.h}>two</h1>
             )}
-            <button className='sigb' onClick={signins}>SIGN UP</button>
+            {checking ? (
+              <button className='sigb' onClick={signins}>SIGNING IN..</button>
+            ) : (
+              <button className='sigb' onClick={signins}>SIGN IN</button>
+            )}
+            
             <h1 className='sig4'>New here? <span className='sig4i' onClick={log}>Sign Up Instead</span></h1>
         </div>
         <Footer />

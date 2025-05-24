@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import HomeNav from './components/HomeNav'
 import { FaTwitter, FaInstagram, FaDiscord } from 'react-icons/fa'
 import Footer from './components/Footer'
+import search from './no-search-found.svg'
 
 const MyBook = () => {
 
@@ -43,7 +44,9 @@ const MyBook = () => {
         <div className='my1'>
             <div className='my2'>
                 <h1 className='my3'>Books Borrowed By {tokens}</h1>
-                {keep.map((item) => 
+                {keep.length > 0 ? (
+                    <>
+                    {keep.map((item) => 
                     <div className='my4'>
                         <div className='my5'>
                             <h1 className='bodh'>{item.title}</h1>
@@ -55,7 +58,15 @@ const MyBook = () => {
                             <h1 className='ab8'>Due Back: <span className='ab8i'>{item.due}</span></h1>
                         </div>
                     </div>
-                )} 
+                )}
+
+                    </>
+                ) : (
+                    <center>
+                <img src={search} alt='svg' className='mig' />
+                </center>
+                )}
+                 
             </div>
             <div className='my2s'>
                 <div className='my6'>

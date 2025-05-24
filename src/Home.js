@@ -44,7 +44,7 @@ const Home = () => {
     )
   }
   else {
-    window.location = "/home/fake"
+    window.location = "/signin"
   }
 }
 

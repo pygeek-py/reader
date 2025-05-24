@@ -2,6 +2,10 @@ import React, { useEffect, useState } from 'react'
 import HomeNav from './components/HomeNav'
 import { FaTwitter, FaInstagram, FaDiscord } from 'react-icons/fa'
 import Footer from './components/Footer'
+import {
+    UserCircleIcon,
+    UserIcon
+} from "@heroicons/react/24/outline";
 
 const Author = () => {
 
@@ -42,26 +46,23 @@ const Author = () => {
                 <span className='sign2s'>Authors</span>
             </h1>
         </div>
-        <div className='au1'>
-            {keep.map((item) => 
-                <div className='au2'>
-                    <div className='au3'></div>
-                    <h1 className='au4'>{item.username}</h1>
-                    <h1 className='au5' onClick={() => next(`${item.id}`)}>Books by this author</h1>
-                    <div className='fo3i'>
-                        <h1 className='fasi'>
-                            <FaTwitter />
-                        </h1>
-                        <h1 className='fasi'>
-                            <FaInstagram />
-                        </h1>
-                        <h1 className='fasi'>
-                            <FaDiscord />
-                        </h1>
-                    </div>
-                </div>
-            )}
-        </div>
+        <div className='author-list'>
+  {keep.map((item) => (
+    <div className='author-card' key={item.id}>
+      <UserCircleIcon className='author-avatar' />
+      <h1 className='author-name'>{item.username}</h1>
+      <h1 className='author-link' onClick={() => next(`${item.id}`)}>
+        Books by this author
+      </h1>
+      <div className='author-socials'>
+        <h1 className='social-icon'><FaTwitter /></h1>
+        <h1 className='social-icon'><FaInstagram /></h1>
+        <h1 className='social-icon'><FaDiscord /></h1>
+      </div>
+    </div>
+  ))}
+</div>
+
         <Footer />
     </div>
   )
