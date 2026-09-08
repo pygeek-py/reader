@@ -2,39 +2,40 @@ import React, { useState, useEffect } from 'react'
 import HomeNav from './components/HomeNav'
 import { FaTwitter, FaInstagram, FaDiscord } from 'react-icons/fa'
 import Footer from './components/Footer'
+import { api } from './api/client'
 
-const Romance = () => {
+const GENRE_CONFIG = {
+    fiction: { label: 'Fiction', endpoint: '/gens/' },
+    romance: { label: 'Romance', endpoint: '/gensr/' },
+}
+
+const Genre = ({ match }) => {
+
+    const genreKey = match.params.genre
+    const config = GENRE_CONFIG[genreKey] || GENRE_CONFIG.fiction
 
     const[keep, setKeep] = useState([])
+    const[loading, setLoading] = useState(true)
+    const[error, setError] = useState(null)
     const[sea, setSea] = useState("")
 
     const handlesub = (e) => {
         e.preventDefault();
-
         window.location = `/search/${sea}`
     }
 
     useEffect(() => {
-        const gets = async () => {
-        
-            const url = 'https://readerapi.onrender.com/gensr/'
-    
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            
-            const data = await response.json()
-            //console.log(data)
-    
-            setKeep(data)
-        }
-        gets();
-    }, [])
+        let cancelled = false
+        setLoading(true)
+        setError(null)
 
-    console.log(keep)
+        api.get(config.endpoint)
+            .then((data) => { if (!cancelled) setKeep(data) })
+            .catch((err) => { if (!cancelled) setError(err.message) })
+            .finally(() => { if (!cancelled) setLoading(false) })
+
+        return () => { cancelled = true }
+    }, [config.endpoint])
 
     const fic = () => {
         window.location = "/gen/fiction"
@@ -48,10 +49,15 @@ const Romance = () => {
         <HomeNav />
         <div className='my1i'>
             <div className='my2'>
-                <h1 className='my3'>Books from <span className='my3i'>Romance</span></h1>
+                <h1 className='my3'>Books from <span className='my3i'>{config.label}</span></h1>
                 <br />
-                {keep.map((item) => 
-                    <section className='sec'>
+                {loading && <p className='state-message'>Loading books...</p>}
+                {!loading && error && <p className='state-message state-message--error'>Couldn't load books: {error}</p>}
+                {!loading && !error && keep.length === 0 && (
+                    <p className='state-message'>No {config.label.toLowerCase()} books are available yet.</p>
+                )}
+                {!loading && !error && keep.map((item) =>
+                    <section className='sec' key={item.id}>
                         <article className='secin'>
                             <h1 className='sec1'>{item.title}</h1>
                             <div className='sec2'>
@@ -125,4 +131,4 @@ const Romance = () => {
   )
 }
 
-export default Romance
+export default Genre

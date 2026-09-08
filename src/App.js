@@ -3,38 +3,32 @@ import { Switch, Route } from 'react-router-dom'
 import Home from './Home';
 import Signin from './Signin';
 import Signup from './Signup';
-import HomeTwo from './HomeTwo';
-import HomeThr from './HomeThr';
 import About from './About';
 import Borrow from './Borrow';
 import Author from './Author';
 import AutBook from './AutBook';
 import MyBook from './MyBook';
-import Gen from './Gen';
-import Romance from './Romance';
+import Genre from './Genre';
 import Search from './Search';
-import Fake from './Fake';
 import Post from './Post';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
   return (
     <div className="App">
       <Switch>
-        <Route exact path="/" component={Home} />
+        <ProtectedRoute exact path="/" component={Home} />
         <Route path="/signin" component={Signin} />
         <Route path="/signup" component={Signup} />
-        <Route path="/home/page/2" component={HomeTwo} />
-        <Route path="/home/page/3" component={HomeThr} />
+        <ProtectedRoute path="/home/page/:page" component={Home} />
         <Route path="/about/:id" component={About} />
-        <Route path="/borrow/:id" component={Borrow} />
+        <ProtectedRoute path="/borrow/:id" component={Borrow} />
         <Route path="/author" component={Author} />
         <Route path="/autbook/:id" component={AutBook} />
-        <Route path="/mybook" component={MyBook} />
-        <Route path="/gen/fiction" component={Gen} />
-        <Route path="/gen/romance" component={Romance} />
+        <ProtectedRoute path="/mybook" component={MyBook} />
+        <Route path="/gen/:genre" component={Genre} />
         <Route path="/search/:name" component={Search} />
-        <Route path="/home/fake" component={Fake} />
-        <Route path="/post" component={Post} />
+        <ProtectedRoute path="/post" component={Post} />
       </Switch>
     </div>
   );

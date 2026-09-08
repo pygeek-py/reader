@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import { signup } from './api/auth'
 
 const Signup = () => {
 
@@ -8,43 +9,26 @@ const Signup = () => {
   const[email, setEmail] = useState("")
   const[password, setPassword] = useState("")
   const[pass, setPass] = useState("")
-  const[va, setVa] = useState(false)
+  const[error, setError] = useState("")
   const[vas, setVas] = useState(false)
   const[checking, setChecking] = useState(false)
 
-  const styles = {
-    h: {
-      display: "none"
-    }
-  }
-
   const sign = async () => {
-    if (`${password}` === `${pass}`) {
-      const url = 'https://readerapi.onrender.com/signup/'
-      setChecking(true)
+    setVas(false)
+    setError("")
 
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          username: `${username}`,
-          email: `${email}`,
-          password: `${password}`
-        })
-      })
-      const data = await response.json()
-      console.log(data)
-      if (data.id) {
-        window.location = '/signin'
-      } else {
-        setVa(true)
-        setChecking(false)
-      }
-    }
-    else {
+    if (password !== pass) {
       setVas(true)
+      return
+    }
+
+    setChecking(true)
+    try {
+      await signup({ username, email, password })
+      window.location = '/signin'
+    } catch (err) {
+      setError(err.message || 'Something went wrong, please try again.')
+      setChecking(false)
     }
   }
 
@@ -58,53 +42,49 @@ const Signup = () => {
         <div className='bac'>
             <h1 className='sign1'>Sign Up</h1>
             <h1 className='sign2'>
-                <span className="sign2i">Home</span>  
-                /  
+                <span className="sign2i">Home</span>
+                /
                 <span className='sign2s'>Signup</span>
             </h1>
         </div>
         <div className='signbody'>
             <h1 className='sig1'>Please signup an account....</h1>
             <h1 className='sig2'>Username: </h1>
-            <input 
-              type='text' 
-              placeholder='Enter your username' 
-              className='sig3' 
+            <input
+              type='text'
+              placeholder='Enter your username'
+              className='sig3'
               onChange={(e) => setUsername(e.target.value)}
             />
-            {va ? (
-              <h3 className='ab7'>Username must be unique</h3>
-            ) : (
-              <h1 style={styles.h}>two</h1>
-            )}
             <h1 className='sig2'>Email: </h1>
-            <input 
-              type='email' 
-              placeholder='Enter your email' 
-              className='sig3' 
+            <input
+              type='email'
+              placeholder='Enter your email'
+              className='sig3'
               onChange={(e) => setEmail(e.target.value)}
             />
             <h1 className='sig2'>Password: </h1>
-            <input 
-              type='password' 
-              placeholder='Enter your password' 
-              className='sig3' 
+            <input
+              type='password'
+              placeholder='Enter your password'
+              className='sig3'
               onChange={(e) => setPassword(e.target.value)}
             />
             <h1 className='sig2'>Confirm password: </h1>
-            <input 
-              type='password' 
-              placeholder='Enter your password again' 
-              className='sig3' 
+            <input
+              type='password'
+              placeholder='Enter your password again'
+              className='sig3'
               onChange={(e) => setPass(e.target.value)}
             />
-            {vas ? (
+            {vas && (
               <h3 className='ab7'>Password doesn't match</h3>
-            ) : (
-              <h1 style={styles.h}>two</h1>
+            )}
+            {error && (
+              <h3 className='ab7'>{error}</h3>
             )}
             {checking ? (
-              <button className='sigb' onClick={sign}>SIGNING UP..</button>
+              <button className='sigb' disabled>SIGNING UP..</button>
             ) : (
               <button className='sigb' onClick={sign}>SIGN UP</button>
             )}

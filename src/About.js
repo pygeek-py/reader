@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import HomeNav from './components/HomeNav'
 import Footer from './components/Footer'
+import { api } from './api/client'
 
 const About = ({match}) => {
 
@@ -8,57 +9,52 @@ const About = ({match}) => {
     const[name, setName] = useState("")
     const[description, setDescription] = useState("")
     const[genre, setGenre] = useState("")
-    const[im, setIm] = useState("")
     const[flip, setFlip] = useState([])
+    const[loading, setLoading] = useState(true)
+    const[error, setError] = useState(null)
     const pagid = match.params.id;
 
     useEffect(() => {
-        const gets = async () => {
-        
-            const url = `https://readerapi.onrender.com/each/${pagid}/`
-    
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+        let cancelled = false
+        setLoading(true)
+        setError(null)
+
+        api.get(`/each/${pagid}/`)
+            .then((data) => {
+                if (cancelled) return
+                setTitle(data.title)
+                setName(data.name)
+                setGenre(data.genre)
+                setDescription(data.description)
             })
-            
-            const data = await response.json()
-            //console.log(data)
-    
-            setTitle(data.title)
-            setName(data.name)
-            setGenre(data.genre)
-            setDescription(data.description)
-        }
-        gets();
-    }, [])
+            .catch((err) => { if (!cancelled) setError(err.message) })
+            .finally(() => { if (!cancelled) setLoading(false) })
+
+        return () => { cancelled = true }
+    }, [pagid])
 
     useEffect(() => {
-        const getdue = async () => {
-            const url = `https://readerapi.onrender.com/eachborrow/${pagid}/`
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            const data = await response.json()
-            setIm(data.imprint)
-            setFlip(data)
-        }
-        getdue()
-    })
+        let cancelled = false
+
+        api.get(`/eachborrow/${pagid}/`)
+            .then((data) => { if (!cancelled) setFlip(data) })
+            .catch(() => { /* loan status is supplementary; ignore failures here */ })
+
+        return () => { cancelled = true }
+    }, [pagid])
 
     const nexts = () => {
         window.location = `/borrow/${pagid}`
     }
-    
+
 
   return (
     <div>
         <HomeNav />
+        {loading && <p className='state-message'>Loading book...</p>}
+        {!loading && error && <p className='state-message state-message--error'>Couldn't load this book: {error}</p>}
+        {!loading && !error && (
+        <>
         <div className='ab1'>
             <div className='ab2'>
                 <article className='secin'>
@@ -77,9 +73,11 @@ const About = ({match}) => {
             <h1 className='bodh'>BOOKS COPIES</h1>
             <div className='bodl'></div>
             <br />
-            
-            {flip.map((item) => 
-                <section className='ab4'>
+
+            {flip.length === 0 && <p className='state-message'>No copies currently on loan.</p>}
+
+            {flip.map((item) =>
+                <section className='ab4' key={item.id}>
                 <article className='ab5'>
                     <h1 className='ab6'>Status: <span className='ab6i'>On Loan</span></h1>
                     <br />
@@ -88,11 +86,12 @@ const About = ({match}) => {
                     <h1 className='ab8'>Imprint: <span className='ab8i'>{item.imprint}</span></h1>
                     <br />
                     <h1 className='ab9'>Id: <span className='ab9i'>{item.num}</span></h1>
-                    <button className='secbsi'>Renew Book</button>
                 </article>
             </section>
             )}
         </div>
+        </>
+        )}
         <Footer />
     </div>
   )

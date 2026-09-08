@@ -1,14 +1,11 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../logo.png";
-import {
-  XMarkIcon,
-  PlusIcon,
-  MinusIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
-import { FaBars, FaSearch, FaTimes } from "react-icons/fa";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import { FaBars } from "react-icons/fa";
+import { useAuth } from "../context/AuthContext";
 
 const HomeNav = () => {
+  const { logout } = useAuth();
   const [sea, setSea] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -46,20 +43,12 @@ const HomeNav = () => {
   };
 
   const out = async () => {
+    await logout();
     window.location = "/signin";
   };
 
-  const [va, setVa] = useState(false);
-  const [vas, setVas] = useState(false);
-
   const dis = () => {
-    setVa(true);
     setIsOpen(true);
-  };
-
-  const val = () => {
-    setVas(true);
-    console.log("hello");
   };
 
   return (
@@ -104,7 +93,7 @@ const HomeNav = () => {
           <div className="navflex">
             <img src={logo} alt="" className="navimg" />
 
-            
+
             <div className="navflexiii">
               <h1 className="sa1" onClick={dis}>
                 <FaBars />

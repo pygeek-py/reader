@@ -1,16 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../logo.png";
-import { FaBars, FaSearch } from "react-icons/fa";
-import {
-  XMarkIcon,
-  PlusIcon,
-  MinusIcon,
-  MagnifyingGlassIcon,
-  Bars3Icon
-} from "@heroicons/react/24/outline";
+import { FaBars } from "react-icons/fa";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 const Navbar = () => {
-  const [va, setVa] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -28,7 +21,6 @@ const Navbar = () => {
   };
 
   const dis = () => {
-    setVa(true);
     setIsOpen(true);
   };
 
@@ -99,7 +91,7 @@ const Navbar = () => {
             </div>
 
             <div className="sidebar-footer">
-              <h1 className="section-title-footer">Sign In</h1>
+              <h1 className="section-title-footer" onClick={log}>Sign In</h1>
             </div>
           </div>
         </div>

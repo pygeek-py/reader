@@ -3,13 +3,16 @@ import HomeNav from './components/HomeNav'
 import { FaTwitter, FaInstagram, FaDiscord } from 'react-icons/fa'
 import Footer from './components/Footer'
 import search from './no-search-found.svg'
+import { api } from './api/client'
+import { useAuth } from './context/AuthContext'
 
 const MyBook = () => {
 
-    const token = JSON.parse(localStorage.getItem('ids'))
-    const tokens = JSON.parse(localStorage.getItem('names'))
+    const { user } = useAuth()
 
     const[keep, setKeep] = useState([])
+    const[loading, setLoading] = useState(true)
+    const[error, setError] = useState(null)
     const[sea, setSea] = useState("")
 
     const handlesub = (e) => {
@@ -19,35 +22,31 @@ const MyBook = () => {
     }
 
     useEffect(() => {
-        const gets = async () => {
-        
-            const url = `https://readerapi.onrender.com/userbo/${token}/`
-    
-            const response = await fetch(url, {
-                method: 'GET',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-            
-            const data = await response.json()
-            //console.log(data)
-    
-            setKeep(data)
-        }
-        gets();
-    }, [])
+        let cancelled = false
+        setLoading(true)
+        setError(null)
+
+        api.get(`/userbo/${user.id}/`, { auth: true })
+            .then((data) => { if (!cancelled) setKeep(data) })
+            .catch((err) => { if (!cancelled) setError(err.message) })
+            .finally(() => { if (!cancelled) setLoading(false) })
+
+        return () => { cancelled = true }
+    }, [user.id])
 
   return (
     <div>
         <HomeNav />
         <div className='my1'>
             <div className='my2'>
-                <h1 className='my3'>Books Borrowed By {tokens}</h1>
-                {keep.length > 0 ? (
+                <h1 className='my3'>Books Borrowed By {user.username}</h1>
+                {loading && <p className='state-message'>Loading your books...</p>}
+                {!loading && error && <p className='state-message state-message--error'>Couldn't load your books: {error}</p>}
+                {!loading && !error && (
+                    keep.length > 0 ? (
                     <>
-                    {keep.map((item) => 
-                    <div className='my4'>
+                    {keep.map((item) =>
+                    <div className='my4' key={item.id}>
                         <div className='my5'>
                             <h1 className='bodh'>{item.title}</h1>
                             <br />
@@ -64,9 +63,10 @@ const MyBook = () => {
                 ) : (
                     <center>
                 <img src={search} alt='svg' className='mig' />
+                <h1 className='bodh'>You haven't borrowed any books yet.</h1>
                 </center>
-                )}
-                 
+                ))}
+
             </div>
             <div className='my2s'>
                 <div className='my6'>
