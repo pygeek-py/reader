@@ -8,6 +8,18 @@ import StateBlock from '../components/StateBlock';
 import { api } from '../api/client';
 import LinkButton from '../components/LinkButton';
 
+// Building the string from local date parts (not toISOString, which converts to
+// UTC first) avoids the date silently shifting by one near midnight in timezones
+// ahead of or behind UTC.
+const toDateInputValue = (date) => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+const TODAY = toDateInputValue(new Date());
+const TWO_WEEKS_OUT = toDateInputValue(new Date(Date.now() + 14 * 24 * 60 * 60 * 1000));
+
 const Borrow = ({ match }) => {
   const history = useHistory();
   const num = match.params.num;
@@ -111,10 +123,13 @@ const Borrow = ({ match }) => {
                 id="due"
                 type="date"
                 className="input"
+                min={TODAY}
+                max={TWO_WEEKS_OUT}
                 value={due}
                 onChange={(e) => setDue(e.target.value)}
                 required
               />
+              <span className="field-hint">Loans can run up to two weeks.</span>
             </div>
             <button type="submit" className="btn btn-primary btn-lg" style={{ marginTop: 24 }} disabled={submitting || !book}>
               {submitting ? 'Submitting…' : 'Confirm borrow'}
