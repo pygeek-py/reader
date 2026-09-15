@@ -7,8 +7,6 @@ import AdminRoute from './components/AdminRoute';
 import LandingPage from './pages/LandingPage';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
-import CheckEmail from './pages/CheckEmail';
-import VerifyEmail from './pages/VerifyEmail';
 import ForgotPassword from './pages/ForgotPassword';
 import ResetPassword from './pages/ResetPassword';
 
@@ -39,8 +37,6 @@ function App() {
         <PublicOnlyRoute path="/signup" component={Signup} />
 
         {/* Public */}
-        <Route path="/check-email" component={CheckEmail} />
-        <Route path="/verify-email/:token" component={VerifyEmail} />
         <Route path="/forgot-password" component={ForgotPassword} />
         <Route path="/reset-password/:uid/:token" component={ResetPassword} />
         <Route exact path="/about" component={About} />

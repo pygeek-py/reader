@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { EyeIcon, EyeSlashIcon, ExclamationTriangleIcon } from '@heroicons/react/24/outline';
-import { signup } from '../api/auth';
+import { useAuth } from '../context/AuthContext';
 import AuthLayout from '../components/AuthLayout';
 
 const Signup = () => {
+  const { register } = useAuth();
   const history = useHistory();
 
   const [username, setUsername] = useState('');
@@ -32,8 +33,8 @@ const Signup = () => {
 
     setSubmitting(true);
     try {
-      await signup({ username, email, password });
-      history.push(`/check-email?email=${encodeURIComponent(email)}`);
+      await register({ username, email, password });
+      history.push('/library');
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');
       setSubmitting(false);
@@ -83,7 +84,6 @@ const Signup = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          <span className="field-hint">We'll send a verification link here before you can sign in.</span>
         </div>
 
         <div className="field">

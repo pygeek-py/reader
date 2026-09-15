@@ -1,7 +1,9 @@
 import { api, storeAuth, clearAuth } from './client';
 
 export async function signup({ username, email, password }) {
-  return api.post('/signup/', { username, email, password });
+  const data = await api.post('/signup/', { username, email, password });
+  storeAuth({ token: data.token, id: data.id, username: data.username, isAdmin: data.is_admin });
+  return data;
 }
 
 export async function signin({ username, password }) {
@@ -20,14 +22,6 @@ export async function logout() {
   } finally {
     clearAuth();
   }
-}
-
-export async function verifyEmail(token) {
-  return api.post(`/verify-email/${encodeURIComponent(token)}/`);
-}
-
-export async function resendVerification({ email, username }) {
-  return api.post('/resend-verification/', { email, username });
 }
 
 export async function requestPasswordReset(email) {

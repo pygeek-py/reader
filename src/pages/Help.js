@@ -4,10 +4,10 @@ import StaticPage from '../components/StaticPage';
 const FAQS = [
   {
     q: "I signed up but can't sign in.",
-    a: 'New accounts need to verify their email first. Check your inbox for a verification link, or use "Resend the verification email" on the sign-in page.',
+    a: "Double-check your username and password. Accounts are ready to use immediately after signing up, so there's no separate step to complete first.",
   },
   {
-    q: "I didn't get the verification or reset email.",
+    q: "I didn't get my password reset email.",
     a: "Double-check the address you signed up with, and check spam. You can request a new link from the sign-in page at any time.",
   },
   {
@@ -20,7 +20,7 @@ const FAQS = [
   },
   {
     q: "How do I add a book?",
-    a: 'Once signed in, use "Add a Book" from the account menu. The book will be listed under your account as its author.',
+    a: 'Adding to the catalog is limited to admin accounts. If you have admin access, use "Add a Book" from the account menu.',
   },
 ];
 

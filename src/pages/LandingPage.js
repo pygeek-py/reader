@@ -6,7 +6,7 @@ import {
   BookmarkSquareIcon,
   ArrowRightIcon,
   SparklesIcon,
-  ShieldCheckIcon,
+  BoltIcon,
   ClockIcon,
 } from '@heroicons/react/24/outline';
 import LandingNav from '../components/LandingNav';
@@ -65,14 +65,14 @@ const FEATURES = [
 ];
 
 const STEPS = [
-  { title: 'Create an account', text: 'Sign up and confirm your email. It takes under a minute.' },
+  { title: 'Create an account', text: "Sign up and you're straight in. It takes under a minute." },
   { title: 'Explore the catalog', text: 'Browse by genre, search by title, or start from an author you already like.' },
   { title: 'Borrow what you find', text: "Reserve a copy with an imprint and due date, right from the book's page." },
   { title: 'Keep track as you go', text: 'My Books keeps every current loan, and its due date, in one list.' },
 ];
 
 const VALUES = [
-  { icon: ShieldCheckIcon, title: 'Verified accounts', text: 'Every account confirms its email before it can borrow anything. No throwaway signups cluttering the library.' },
+  { icon: BoltIcon, title: 'Quick to join', text: "Create an account and you're straight in, ready to borrow. No email hoops to jump through first." },
   { icon: SparklesIcon, title: 'Built on real data', text: 'No filler content. Every book, author, and count on this page comes straight from the live catalog.' },
   { icon: ClockIcon, title: 'Nothing to install', text: 'Reader runs in the browser. Open a tab and you\'re in your library, on any device.' },
 ];

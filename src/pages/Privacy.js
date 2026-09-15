@@ -21,8 +21,8 @@ const Privacy = () => (
     </p>
     <h2>Email</h2>
     <p>
-      Your email is used only to send account verification and password-reset links. It isn't
-      used for marketing.
+      Your email is used only to send password-reset links if you request one. It isn't used
+      for marketing.
     </p>
   </StaticPage>
 );

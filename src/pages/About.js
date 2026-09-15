@@ -18,8 +18,8 @@ const About = () => (
     <p>
       This is a demonstration project. There's no company behind it, no waitlist, and nothing
       for sale. It exists to show what a well-considered version of this kind of product could
-      look like, end to end: authentication with real email verification, a derived author
-      system, and a design system built for the product rather than borrowed from a template.
+      look like, end to end: real authentication, a derived author system, and a design system
+      built for the product rather than borrowed from a template.
     </p>
   </StaticPage>
 );

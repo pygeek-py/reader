@@ -13,27 +13,20 @@ const Signin = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
-  const [unverifiedUsername, setUnverifiedUsername] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
   const params = new URLSearchParams(location.search);
-  const justVerified = params.get('verified') === '1';
   const justReset = params.get('reset') === '1';
 
   const submit = async (e) => {
     e.preventDefault();
     setError('');
-    setUnverifiedUsername('');
     setSubmitting(true);
     try {
       await login(username, password);
       history.push('/library');
     } catch (err) {
-      if (err.data && err.data.code === 'unverified') {
-        setUnverifiedUsername(username);
-      } else {
-        setError(err.message || 'Something went wrong. Please try again.');
-      }
+      setError(err.message || 'Something went wrong. Please try again.');
       setSubmitting(false);
     }
   };
@@ -48,31 +41,9 @@ const Signin = () => {
         <p>Sign in to pick up where you left off.</p>
       </div>
 
-      {justVerified && (
-        <div className="form-notice-banner" style={{ marginBottom: 20 }}>
-          Your email is verified. You can sign in now.
-        </div>
-      )}
       {justReset && (
         <div className="form-notice-banner" style={{ marginBottom: 20 }}>
           Your password was reset. Sign in with your new password.
-        </div>
-      )}
-
-      {unverifiedUsername && (
-        <div className="form-error-banner" style={{ marginBottom: 20 }}>
-          <ExclamationTriangleIcon />
-          <span>
-            This account hasn't verified its email yet.{' '}
-            <button
-              type="button"
-              className="btn-ghost"
-              style={{ fontWeight: 700 }}
-              onClick={() => history.push(`/check-email?username=${encodeURIComponent(unverifiedUsername)}`)}
-            >
-              Resend the verification email
-            </button>
-          </span>
         </div>
       )}
 

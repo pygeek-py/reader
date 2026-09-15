@@ -13,6 +13,12 @@ export function AuthProvider({ children }) {
     return data;
   }, []);
 
+  const register = useCallback(async ({ username, email, password }) => {
+    const data = await authApi.signup({ username, email, password });
+    setUser({ token: data.token, id: data.id, username: data.username, isAdmin: Boolean(data.is_admin) });
+    return data;
+  }, []);
+
   const logout = useCallback(async () => {
     try {
       await authApi.logout();
@@ -23,8 +29,8 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = useMemo(
-    () => ({ user, isAuthenticated: Boolean(user), isAdmin: Boolean(user?.isAdmin), login, logout }),
-    [user, login, logout]
+    () => ({ user, isAuthenticated: Boolean(user), isAdmin: Boolean(user?.isAdmin), login, register, logout }),
+    [user, login, register, logout]
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

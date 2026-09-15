@@ -10,8 +10,7 @@ const Terms = () => (
     <h2>Accounts</h2>
     <p>
       You're responsible for the accuracy of the information you provide and for keeping your
-      password to yourself. Accounts must verify a real, working email address before they can
-      sign in.
+      password to yourself.
     </p>
     <h2>Content you add</h2>
     <p>
