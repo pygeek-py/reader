@@ -8,6 +8,8 @@ import StateBlock from '../components/StateBlock';
 import { useAuth } from '../context/AuthContext';
 import { api } from '../api/client';
 
+const MAX_ACTIVE_LOANS = 5;
+
 const MyLibrary = () => {
   const { user } = useAuth();
   const history = useHistory();
@@ -35,7 +37,10 @@ const MyLibrary = () => {
           <div className="page-header">
             <span className="eyebrow">Your loans</span>
             <h1 className="page-title">My Books</h1>
-            <p className="page-subtitle">Everything you currently have borrowed, with imprint and due date at a glance.</p>
+            <p className="page-subtitle">
+              Everything you currently have borrowed, with imprint and due date at a glance.
+              {!loading && !error && ` ${loans.length} of ${MAX_ACTIVE_LOANS} books borrowed.`}
+            </p>
           </div>
 
           {loading && <StateBlock variant="loading" title="Loading your books..." />}

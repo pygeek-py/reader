@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
+import { ExclamationTriangleIcon, BookmarkSquareIcon } from '@heroicons/react/24/outline';
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
 import BookCover from '../components/BookCover';
 import StateBlock from '../components/StateBlock';
 import { api } from '../api/client';
+import { useAuth } from '../context/AuthContext';
 import LinkButton from '../components/LinkButton';
+
+const MAX_ACTIVE_LOANS = 5;
 
 // Building the string from local date parts (not toISOString, which converts to
 // UTC first) avoids the date silently shifting by one near midnight in timezones
@@ -21,11 +24,13 @@ const TODAY = toDateInputValue(new Date());
 const TWO_WEEKS_OUT = toDateInputValue(new Date(Date.now() + 14 * 24 * 60 * 60 * 1000));
 
 const Borrow = ({ match }) => {
+  const { user } = useAuth();
   const history = useHistory();
   const num = match.params.num;
 
   const [book, setBook] = useState(null);
   const [loadError, setLoadError] = useState(null);
+  const [loanCount, setLoanCount] = useState(null);
   const [imprint, setImprint] = useState('');
   const [due, setDue] = useState('');
   const [error, setError] = useState(null);
@@ -36,8 +41,13 @@ const Borrow = ({ match }) => {
     api.get(`/each/${num}/`)
       .then((data) => { if (!cancelled) setBook(data); })
       .catch((err) => { if (!cancelled) setLoadError(err.message); });
+    api.get(`/userbo/${user.id}/`, { auth: true })
+      .then((data) => { if (!cancelled) setLoanCount(data.length); })
+      .catch(() => { if (!cancelled) setLoanCount(0); });
     return () => { cancelled = true; };
-  }, [num]);
+  }, [num, user.id]);
+
+  const atLoanLimit = loanCount !== null && loanCount >= MAX_ACTIVE_LOANS;
 
   const submit = async (e) => {
     e.preventDefault();
@@ -65,6 +75,26 @@ const Borrow = ({ match }) => {
         <SiteNav />
         <main className="page-content container">
           <StateBlock variant="error" title="Couldn't load this book" text={loadError} />
+        </main>
+        <SiteFooter />
+      </div>
+    );
+  }
+
+  if (atLoanLimit) {
+    return (
+      <div className="page">
+        <SiteNav />
+        <main className="page-content container">
+          <StateBlock
+            icon={BookmarkSquareIcon}
+            title="You've reached your borrowing limit"
+            text={`You already have ${MAX_ACTIVE_LOANS} books on loan. Return one before borrowing another.`}
+          >
+            <button className="btn btn-primary" style={{ marginTop: 8 }} onClick={() => history.push('/library/mine')}>
+              View My Books
+            </button>
+          </StateBlock>
         </main>
         <SiteFooter />
       </div>
