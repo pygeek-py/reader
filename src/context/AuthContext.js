@@ -9,7 +9,7 @@ export function AuthProvider({ children }) {
 
   const login = useCallback(async (username, password) => {
     const data = await authApi.signin({ username, password });
-    setUser({ token: data.token, id: data.id, username: data.username });
+    setUser({ token: data.token, id: data.id, username: data.username, isAdmin: Boolean(data.is_admin) });
     return data;
   }, []);
 
@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const value = useMemo(
-    () => ({ user, isAuthenticated: Boolean(user), login, logout }),
+    () => ({ user, isAuthenticated: Boolean(user), isAdmin: Boolean(user?.isAdmin), login, logout }),
     [user, login, logout]
   );
 

@@ -5,15 +5,18 @@ import App from './App';
 import { BrowserRouter as Router} from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
 
+// React 18's <StrictMode> double-invokes mount lifecycles in dev, which tears down
+// react-router-dom v5's history.listen() subscription (set up in its Router
+// constructor, not componentDidMount) and never resubscribes it; history.push()
+// then updates the URL without the app ever re-rendering. Omitting StrictMode here
+// is a dev-only tradeoff; it has no effect on the production build.
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <Router>
-      <AuthProvider>
-        <App />
-      </AuthProvider>
-    </Router>
-  </React.StrictMode>
+  <Router>
+    <AuthProvider>
+      <App />
+    </AuthProvider>
+  </Router>
 );
 
 // If you want to start measuring performance in your app, pass a function

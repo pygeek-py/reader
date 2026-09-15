@@ -3,6 +3,7 @@ const API_BASE_URL = (process.env.REACT_APP_API_URL || 'https://readerapi.onrend
 const AUTH_TOKEN_KEY = 'authToken';
 const USER_ID_KEY = 'userId';
 const USERNAME_KEY = 'username';
+const IS_ADMIN_KEY = 'isAdmin';
 
 export function getStoredAuth() {
   try {
@@ -10,22 +11,24 @@ export function getStoredAuth() {
     const id = localStorage.getItem(USER_ID_KEY);
     const username = localStorage.getItem(USERNAME_KEY);
     if (!token || !id || !username) return null;
-    return { token, id, username };
+    return { token, id, username, isAdmin: localStorage.getItem(IS_ADMIN_KEY) === 'true' };
   } catch {
     return null;
   }
 }
 
-export function storeAuth({ token, id, username }) {
+export function storeAuth({ token, id, username, isAdmin }) {
   localStorage.setItem(AUTH_TOKEN_KEY, token);
   localStorage.setItem(USER_ID_KEY, id);
   localStorage.setItem(USERNAME_KEY, username);
+  localStorage.setItem(IS_ADMIN_KEY, isAdmin ? 'true' : 'false');
 }
 
 export function clearAuth() {
   localStorage.removeItem(AUTH_TOKEN_KEY);
   localStorage.removeItem(USER_ID_KEY);
   localStorage.removeItem(USERNAME_KEY);
+  localStorage.removeItem(IS_ADMIN_KEY);
 }
 
 export class ApiError extends Error {
