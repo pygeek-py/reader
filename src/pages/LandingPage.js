@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
 import {
   MagnifyingGlassIcon,
@@ -13,6 +13,38 @@ import LandingNav from '../components/LandingNav';
 import SiteFooter from '../components/SiteFooter';
 import BookCover from '../components/BookCover';
 import { api } from '../api/client';
+
+// Counts up from its previous value to `value` whenever it changes; renders the
+// placeholder as-is until a real number arrives (e.g. before the stats API resolves).
+const AnimatedNumber = ({ value, placeholder = '…' }) => {
+  const [display, setDisplay] = useState(value);
+  const fromRef = useRef(value);
+
+  useEffect(() => {
+    if (typeof value !== 'number') return;
+    const from = typeof fromRef.current === 'number' ? fromRef.current : 0;
+    if (from === value) { setDisplay(value); return; }
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) { setDisplay(value); fromRef.current = value; return; }
+
+    const duration = 700;
+    const start = performance.now();
+    let frame;
+    const tick = (now) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(from + (value - from) * eased));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+      else fromRef.current = value;
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [value]);
+
+  const shown = typeof display === 'number' ? display : value;
+  return <>{typeof value === 'number' ? shown : placeholder}</>;
+};
 
 const FEATURES = [
   {
@@ -78,6 +110,24 @@ const LandingPage = () => {
     target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth', block: 'start' });
   }, [location.hash]);
 
+  // Fade sections in the first time they scroll into view, then leave them alone.
+  useEffect(() => {
+    const targets = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('reveal-visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+    targets.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="page">
       <LandingNav />
@@ -106,11 +156,11 @@ const LandingPage = () => {
                 </div>
                 <div className="hero-meta-row">
                   <div className="hero-meta-item">
-                    <span className="hero-meta-num">{stats.books ?? '…'}</span>
+                    <span className="hero-meta-num"><AnimatedNumber value={stats.books} /></span>
                     <span className="hero-meta-label">Books in the catalog</span>
                   </div>
                   <div className="hero-meta-item">
-                    <span className="hero-meta-num">{stats.authors ?? '…'}</span>
+                    <span className="hero-meta-num"><AnimatedNumber value={stats.authors} /></span>
                     <span className="hero-meta-label">Authors represented</span>
                   </div>
                   <div className="hero-meta-item">
@@ -145,14 +195,14 @@ const LandingPage = () => {
         {/* FEATURES */}
         <section className="section" id="features">
           <div className="container">
-            <div className="section-head center">
+            <div className="section-head center reveal">
               <span className="eyebrow" style={{ justifyContent: 'center' }}>What Reader does</span>
               <h2>Everything a library catalog should have been</h2>
               <p>Three things, done properly, instead of ten things done halfway.</p>
             </div>
             <div className="feature-grid">
-              {FEATURES.map((f) => (
-                <div className="feature-card" key={f.title}>
+              {FEATURES.map((f, i) => (
+                <div className="feature-card reveal" style={{ transitionDelay: `${i * 90}ms` }} key={f.title}>
                   <div className="feature-icon-wrap"><f.icon width={24} /></div>
                   <h3>{f.title}</h3>
                   <p>{f.text}</p>
@@ -165,13 +215,13 @@ const LandingPage = () => {
         {/* HOW IT WORKS */}
         <section className="section section--tight" id="how-it-works" style={{ backgroundColor: 'var(--color-surface-sunken)' }}>
           <div className="container">
-            <div className="section-head">
+            <div className="section-head reveal">
               <span className="eyebrow">How it works</span>
               <h2>From sign-up to your next book, in four steps</h2>
             </div>
             <div className="steps-row">
               {STEPS.map((step, i) => (
-                <div className="step-item" key={step.title}>
+                <div className="step-item reveal" style={{ transitionDelay: `${i * 90}ms` }} key={step.title}>
                   <div className="step-number">{String(i + 1).padStart(2, '0')}</div>
                   <h3>{step.title}</h3>
                   <p>{step.text}</p>
@@ -184,13 +234,13 @@ const LandingPage = () => {
         {/* TRUST / VALUES */}
         <section className="section" id="about">
           <div className="container">
-            <div className="section-head center">
+            <div className="section-head center reveal">
               <span className="eyebrow" style={{ justifyContent: 'center' }}>Why it holds together</span>
               <h2>Small, deliberate choices instead of empty promises</h2>
             </div>
             <div className="values-grid">
-              {VALUES.map((v) => (
-                <div className="value-card" key={v.title}>
+              {VALUES.map((v, i) => (
+                <div className="value-card reveal" style={{ transitionDelay: `${i * 90}ms` }} key={v.title}>
                   <v.icon />
                   <h4>{v.title}</h4>
                   <p>{v.text}</p>
@@ -203,7 +253,7 @@ const LandingPage = () => {
         {/* FINAL CTA */}
         <section className="section">
           <div className="container">
-            <div className="final-cta">
+            <div className="final-cta reveal">
               <h2>Your next book is already in the catalog.</h2>
               <p>Create an account and find it.</p>
               <div className="hero-cta-row">
