@@ -15,7 +15,9 @@ export function AuthProvider({ children }) {
 
   const register = useCallback(async ({ username, email, password }) => {
     const data = await authApi.signup({ username, email, password });
-    setUser({ token: data.token, id: data.id, username: data.username, isAdmin: Boolean(data.is_admin) });
+    if (data.token) {
+      setUser({ token: data.token, id: data.id, username: data.username, isAdmin: Boolean(data.is_admin) });
+    }
     return data;
   }, []);
 

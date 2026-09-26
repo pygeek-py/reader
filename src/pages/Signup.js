@@ -33,8 +33,8 @@ const Signup = () => {
 
     setSubmitting(true);
     try {
-      await register({ username, email, password });
-      history.push('/library');
+      const data = await register({ username, email, password });
+      history.push(data.verification_required ? `/check-email?email=${encodeURIComponent(email)}` : '/library');
     } catch (err) {
       setError(err.message || 'Something went wrong. Please try again.');
       setSubmitting(false);
@@ -84,6 +84,7 @@ const Signup = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          <span className="field-hint">Used to confirm your account and to reset your password.</span>
         </div>
 
         <div className="field">
