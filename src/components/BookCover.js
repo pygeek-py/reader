@@ -4,15 +4,16 @@ import React, { useState } from 'react';
 // fall back to a deterministic "spine" cover: a genre-tinted gradient plus its
 // title, always the same for the same book, so nothing shows up broken.
 const GENRE_GRADIENTS = {
-  Fiction: ['#1F5E4D', '#173F34'],
-  Romance: ['#8B3A4A', '#5E2733'],
-  Classic: ['#3A4A6B', '#242E45'],
-  'Modernist Literature': ['#4A4458', '#2E293A'],
-  Bildungsroman: ['#8A6524', '#5C4419'],
+  Classics: ['#3A4A6B', '#242E45'],
+  'Literary Fiction': ['#1F5E4D', '#173F34'],
   Fantasy: ['#3F5C3A', '#28401F'],
-  'Magical Realism': ['#6B4A8B', '#432D5C'],
-  Dystopia: ['#5A5A5A', '#333333'],
-  Gothic: ['#2B2B33', '#151519'],
+  'Science Fiction': ['#2F5B7A', '#1B3549'],
+  Dystopian: ['#5A5A5A', '#333333'],
+  Mystery: ['#4A4458', '#2E293A'],
+  Romance: ['#8B3A4A', '#5E2733'],
+  'Historical Fiction': ['#8A6524', '#5C4419'],
+  Horror: ['#2B2B33', '#151519'],
+  'Non-Fiction': ['#6B4A2B', '#43301C'],
 };
 const FALLBACK_GRADIENT = ['#1F5E4D', '#17493C'];
 
@@ -20,29 +21,37 @@ function gradientFor(genre) {
   return GENRE_GRADIENTS[genre] || FALLBACK_GRADIENT;
 }
 
-const BookCover = ({ title, genre, coverUrl, className = '', style }) => {
-  const [imageFailed, setImageFailed] = useState(false);
+// Open Library serves each cover in several sizes; the large one is heavy, so
+// cards and lists ask for the medium size and only the book page asks for large.
+function sizedCoverUrl(url, size) {
+  return url.includes('covers.openlibrary.org') ? url.replace(/-[SML]\.jpg/, `-${size}.jpg`) : url;
+}
 
-  if (coverUrl && !imageFailed) {
-    return (
-      <div className={`book-cover book-cover-image ${className}`} style={style}>
-        <img
-          src={coverUrl}
-          alt={`Cover of ${title}`}
-          loading="lazy"
-          onError={() => setImageFailed(true)}
-        />
-      </div>
-    );
-  }
+const BookCover = ({ title, genre, coverUrl, size = 'M', className = '', style }) => {
+  const [imageFailed, setImageFailed] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   const [from, to] = gradientFor(genre);
+  const hasImage = coverUrl && !imageFailed;
+
+  // The tinted spine cover is always underneath; the real cover fades in over
+  // it once it arrives, so a slow image host never leaves an empty box.
   return (
     <div
-      className={`book-cover ${className}`}
+      className={`book-cover ${hasImage ? 'book-cover-image' : ''} ${className}`}
       style={{ background: `linear-gradient(155deg, ${from}, ${to})`, ...style }}
     >
-      <span className="book-cover-title">{title}</span>
+      {!(hasImage && imageLoaded) && <span className="book-cover-title">{title}</span>}
+      {hasImage && (
+        <img
+          src={sizedCoverUrl(coverUrl, size)}
+          alt={`Cover of ${title}`}
+          loading="lazy"
+          className={imageLoaded ? 'is-loaded' : ''}
+          onLoad={() => setImageLoaded(true)}
+          onError={() => setImageFailed(true)}
+        />
+      )}
     </div>
   );
 };

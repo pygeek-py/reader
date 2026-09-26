@@ -1,10 +1,12 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import BookCover from './BookCover';
+import { availabilityLabel } from '../utils/catalog';
 
 const BookCard = ({ book }) => {
   const history = useHistory();
   const open = () => history.push(`/library/books/${book.num}`);
+  const availability = availabilityLabel(book);
 
   return (
     <article
@@ -26,6 +28,12 @@ const BookCard = ({ book }) => {
       </div>
       <div className="book-card-footer">
         <span className="badge badge-neutral">{book.genre}</span>
+        {availability && (
+          <span className={`availability availability--${availability.tone}`}>
+            <span className="availability-dot" />
+            {availability.short}
+          </span>
+        )}
       </div>
     </article>
   );

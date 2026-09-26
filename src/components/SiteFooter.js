@@ -19,8 +19,8 @@ const SiteFooter = () => {
           <div>
             <div className="footer-brand-text">Reader</div>
             <p className="footer-tagline">
-              A calm, well-organized home for your reading life: discover books, follow authors,
-              and keep track of what you borrow.
+              Search the catalog, borrow up to five books at a time,
+              and manage every due date and return in one place.
             </p>
           </div>
           <div className="footer-col">
@@ -54,7 +54,7 @@ const SiteFooter = () => {
           </div>
         </div>
         <div className="footer-bottom">
-          <span>&copy; {year} Reader. Built as a demonstration project.</span>
+          <span>&copy; {year} Reader Library. All rights reserved.</span>
         </div>
       </div>
     </footer>

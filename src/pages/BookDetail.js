@@ -8,6 +8,7 @@ import StateBlock from '../components/StateBlock';
 import { api } from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import LinkButton from '../components/LinkButton';
+import { availabilityLabel, formatDate, shelfMark } from '../utils/catalog';
 
 const BookDetail = ({ match }) => {
   const { isAuthenticated } = useAuth();
@@ -38,6 +39,48 @@ const BookDetail = ({ match }) => {
     return () => { cancelled = true; };
   }, [num, isAuthenticated]);
 
+  const myLoan = isAuthenticated ? loans.find((loan) => loan.mine) : null;
+  const availability = book ? availabilityLabel(book) : null;
+  const soldOut = book && book.available_copies === 0;
+  const nextBack = loans.length > 0
+    ? loans.map((loan) => loan.due).sort()[0]
+    : null;
+
+  const details = book ? [
+    ['Author', book.name],
+    ['Genre', book.genre],
+    book.publish_year && ['First published', book.publish_year],
+    book.pages && ['Pages', book.pages],
+    book.isbn && ['ISBN', book.isbn],
+    ['Shelf mark', shelfMark(book)],
+    ['Catalog no.', book.num],
+  ].filter(Boolean) : [];
+
+  const borrowButton = () => {
+    if (!isAuthenticated) {
+      return (
+        <button className="btn btn-primary btn-lg" onClick={() => history.push('/signin')}>
+          Sign in to borrow
+        </button>
+      );
+    }
+    if (myLoan) {
+      return (
+        <button className="btn btn-secondary btn-lg" onClick={() => history.push('/library/mine')}>
+          On your loan, due {formatDate(myLoan.due)}
+        </button>
+      );
+    }
+    if (soldOut) {
+      return <button className="btn btn-primary btn-lg" disabled>All copies on loan</button>;
+    }
+    return (
+      <button className="btn btn-primary btn-lg" onClick={() => history.push(`/library/books/${num}/borrow`)}>
+        Borrow this book
+      </button>
+    );
+  };
+
   return (
     <div className="page">
       <SiteNav />
@@ -56,7 +99,7 @@ const BookDetail = ({ match }) => {
 
               <div className="book-detail-grid">
                 <div className="book-detail-cover">
-                  <BookCover title={book.title} genre={book.genre} coverUrl={book.cover_url} />
+                  <BookCover title={book.title} genre={book.genre} coverUrl={book.cover_url} size="L" />
                 </div>
 
                 <div>
@@ -72,15 +115,17 @@ const BookDetail = ({ match }) => {
                     <span className="badge">{book.genre}</span>
                   </div>
 
+                  {availability && (
+                    <p className={`availability availability--${availability.tone} availability--lg`}>
+                      <span className="availability-dot" />
+                      {availability.long}
+                    </p>
+                  )}
+
                   <p className="book-detail-description">{book.description}</p>
 
                   <div className="book-detail-actions">
-                    <button
-                      className="btn btn-primary btn-lg"
-                      onClick={() => history.push(isAuthenticated ? `/library/books/${num}/borrow` : '/signin')}
-                    >
-                      {isAuthenticated ? 'Borrow this book' : 'Sign in to borrow'}
-                    </button>
+                    {borrowButton()}
                     {book.author_id && (
                       <button className="btn btn-secondary btn-lg" onClick={() => history.push(`/library/authors/${book.author_id}`)}>
                         <UserCircleIcon width={18} /> View author
@@ -88,28 +133,36 @@ const BookDetail = ({ match }) => {
                     )}
                   </div>
 
-                  <div style={{ marginTop: 48 }}>
-                    <h3 style={{ fontSize: '1.05rem', marginBottom: 6 }}>Copies currently on loan</h3>
-                    {!isAuthenticated ? (
-                      <p className="field-hint">
-                        <LinkButton onClick={() => history.push('/signin')}>Sign in</LinkButton> to see availability.
-                      </p>
-                    ) : loans.length === 0 ? (
-                      <p className="field-hint">No copies are currently on loan. This one's available.</p>
-                    ) : (
+                  <dl className="catalog-details">
+                    {details.map(([label, value]) => (
+                      <div className="catalog-details-row" key={label}>
+                        <dt>{label}</dt>
+                        <dd>{value}</dd>
+                      </div>
+                    ))}
+                  </dl>
+
+                  {isAuthenticated && loans.length > 0 && (
+                    <div style={{ marginTop: 40 }}>
+                      <h3 style={{ fontSize: '1.05rem', marginBottom: 6 }}>Currently on loan</h3>
+                      {soldOut && nextBack && (
+                        <p className="field-hint" style={{ marginBottom: 12 }}>
+                          The next copy is due back {formatDate(nextBack)}.
+                        </p>
+                      )}
                       <div className="loan-status-list">
                         {loans.map((loan) => (
                           <div className="card loan-status-row" key={loan.id}>
                             <span className="status-icon"><ClockIcon /></span>
                             <div>
-                              <div style={{ fontWeight: 600, fontSize: '0.92rem' }}>Due back {loan.due}</div>
-                              <div className="field-hint">Imprint: {loan.imprint}</div>
+                              <div style={{ fontWeight: 600, fontSize: '0.92rem' }}>Due back {formatDate(loan.due)}</div>
+                              <div className="field-hint">Edition: {loan.imprint}</div>
                             </div>
                           </div>
                         ))}
                       </div>
-                    )}
-                  </div>
+                    </div>
+                  )}
                 </div>
               </div>
             </>

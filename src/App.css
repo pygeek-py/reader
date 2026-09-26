@@ -1131,16 +1131,18 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   font-size: 1.05rem;
   line-height: 1.25;
 }
-.book-cover-image {
-  padding: 0;
-  background: var(--color-surface-sunken);
-}
-.book-cover-image::before { content: none; }
+.book-cover-image { padding: 16px; }
 .book-cover-image img {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
+.book-cover-image img.is-loaded { opacity: 1; }
+.book-list-row .book-cover-image { padding: 8px; }
 
 .book-grid {
   display: grid;
@@ -1458,3 +1460,57 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
   .loan-card { flex-direction: column; }
   .page-header-row { flex-direction: column; align-items: flex-start; }
 }
+
+/* ==========================================================================
+   LIBRARY CATALOG: availability, due status, catalog details, loan actions
+   ========================================================================== */
+.availability {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.availability-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+.availability--in { color: var(--color-success); }
+.availability--out { color: var(--color-danger); }
+.availability--lg { font-size: 0.95rem; margin: 0 0 18px; }
+
+.due-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.due-badge--ok { background: var(--color-surface-sunken); color: var(--color-ink-secondary); }
+.due-badge--soon { background: var(--color-accent-tint); color: #8A6524; }
+.due-badge--overdue { background: var(--color-danger-tint); color: var(--color-danger); }
+
+.loan-actions { display: flex; align-items: center; gap: 16px; margin-top: 18px; flex-wrap: wrap; }
+
+.catalog-details {
+  margin: 36px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 18px 28px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 24px;
+}
+.catalog-details-row dt {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-ink-muted);
+  margin-bottom: 2px;
+}
+.catalog-details-row dd { margin: 0; font-size: 0.95rem; font-weight: 600; color: var(--color-ink); }
+
+.results-count { margin: -8px 0 20px; font-size: 0.88rem; color: var(--color-ink-muted); }
+
+.field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+@media (max-width: 520px) { .field-row { grid-template-columns: 1fr; } }
+button.btn:disabled, button.btn[disabled] { opacity: 0.55; cursor: not-allowed; }

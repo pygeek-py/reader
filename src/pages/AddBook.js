@@ -4,8 +4,7 @@ import { CheckCircleIcon, ExclamationTriangleIcon } from '@heroicons/react/24/ou
 import SiteNav from '../components/SiteNav';
 import SiteFooter from '../components/SiteFooter';
 import { api } from '../api/client';
-
-const GENRES = ['Fiction', 'Romance', 'Classic', 'Modernist Literature', 'Bildungsroman', 'Fantasy', 'Magical Realism', 'Dystopia', 'Gothic'];
+import { GENRES } from '../constants';
 
 const AddBook = () => {
   const history = useHistory();
@@ -14,6 +13,10 @@ const AddBook = () => {
   const [name, setName] = useState('');
   const [genre, setGenre] = useState(GENRES[0]);
   const [num, setNum] = useState('');
+  const [isbn, setIsbn] = useState('');
+  const [publishYear, setPublishYear] = useState('');
+  const [pages, setPages] = useState('');
+  const [copies, setCopies] = useState('1');
   const [description, setDescription] = useState('');
   const [coverUrl, setCoverUrl] = useState('');
   const [error, setError] = useState(null);
@@ -23,11 +26,20 @@ const AddBook = () => {
   const submit = async (e) => {
     e.preventDefault();
     setError(null);
+    setSuccess(false);
     setSubmitting(true);
     try {
-      await api.post('/bookp/', { title, description, genre, name, num, cover_url: coverUrl }, { auth: true });
+      await api.post('/bookp/', {
+        title, description, genre, name, num,
+        cover_url: coverUrl,
+        isbn,
+        publish_year: publishYear || null,
+        pages: pages || null,
+        copies: copies || 1,
+      }, { auth: true });
       setSuccess(true);
-      setTitle(''); setName(''); setNum(''); setDescription(''); setCoverUrl('');
+      setTitle(''); setName(''); setNum(''); setIsbn(''); setPublishYear(''); setPages('');
+      setCopies('1'); setDescription(''); setCoverUrl('');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -41,9 +53,9 @@ const AddBook = () => {
       <main className="page-content">
         <div className="container form-page" style={{ paddingTop: 32, paddingBottom: 60 }}>
           <div className="page-header" style={{ padding: 0, marginBottom: 28 }}>
-            <span className="eyebrow">Contribute to the catalog</span>
+            <span className="eyebrow">Librarian tools</span>
             <h1 className="page-title" style={{ fontSize: '1.9rem' }}>Add a book</h1>
-            <p className="page-subtitle">Add a title to the library under your name as its author.</p>
+            <p className="page-subtitle">Catalog a new title and set how many copies the library holds.</p>
           </div>
 
           {success && (
@@ -52,7 +64,7 @@ const AddBook = () => {
               <span>
                 Added to the catalog.{' '}
                 <button type="button" className="btn-ghost" style={{ fontWeight: 700 }} onClick={() => history.push('/library')}>
-                  View the library
+                  View the catalog
                 </button>
               </span>
             </div>
@@ -67,12 +79,11 @@ const AddBook = () => {
           <form onSubmit={submit}>
             <div className="field">
               <label className="field-label" htmlFor="title">Title</label>
-              <input id="title" className="input" maxLength={30} value={title} onChange={(e) => setTitle(e.target.value)} required />
-              <span className="field-hint">Up to 30 characters.</span>
+              <input id="title" className="input" maxLength={200} value={title} onChange={(e) => setTitle(e.target.value)} required />
             </div>
             <div className="field">
-              <label className="field-label" htmlFor="name">Author name</label>
-              <input id="name" className="input" maxLength={30} placeholder="How the author's name should display" value={name} onChange={(e) => setName(e.target.value)} required />
+              <label className="field-label" htmlFor="name">Author</label>
+              <input id="name" className="input" maxLength={100} placeholder="How the author's name should display" value={name} onChange={(e) => setName(e.target.value)} required />
             </div>
             <div className="field">
               <label className="field-label" htmlFor="genre">Genre</label>
@@ -80,10 +91,30 @@ const AddBook = () => {
                 {GENRES.map((g) => <option key={g} value={g}>{g}</option>)}
               </select>
             </div>
+            <div className="field-row">
+              <div className="field">
+                <label className="field-label" htmlFor="num">Catalog number</label>
+                <input id="num" type="number" className="input" value={num} onChange={(e) => setNum(e.target.value)} required />
+                <span className="field-hint">Must be unique.</span>
+              </div>
+              <div className="field">
+                <label className="field-label" htmlFor="copies">Copies held</label>
+                <input id="copies" type="number" min="1" max="99" className="input" value={copies} onChange={(e) => setCopies(e.target.value)} required />
+              </div>
+            </div>
             <div className="field">
-              <label className="field-label" htmlFor="num">Catalog number</label>
-              <input id="num" type="number" className="input" value={num} onChange={(e) => setNum(e.target.value)} required />
-              <span className="field-hint">A unique identifier for this copy in the catalog.</span>
+              <label className="field-label" htmlFor="isbn">ISBN <span className="field-hint">(optional)</span></label>
+              <input id="isbn" className="input" maxLength={20} value={isbn} onChange={(e) => setIsbn(e.target.value)} />
+            </div>
+            <div className="field-row">
+              <div className="field">
+                <label className="field-label" htmlFor="publishYear">First published <span className="field-hint">(optional)</span></label>
+                <input id="publishYear" type="number" min="1" max="2100" className="input" value={publishYear} onChange={(e) => setPublishYear(e.target.value)} />
+              </div>
+              <div className="field">
+                <label className="field-label" htmlFor="pages">Pages <span className="field-hint">(optional)</span></label>
+                <input id="pages" type="number" min="1" className="input" value={pages} onChange={(e) => setPages(e.target.value)} />
+              </div>
             </div>
             <div className="field">
               <label className="field-label" htmlFor="description">Description</label>

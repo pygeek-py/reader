@@ -2,24 +2,24 @@ import React from 'react';
 import StaticPage from '../components/StaticPage';
 
 const About = () => (
-  <StaticPage eyebrow="About Reader" title="A calmer way to keep track of what you read">
+  <StaticPage eyebrow="About Reader Library" title="A library catalog you can use from anywhere">
     <p>
-      Reader started from a simple frustration: library catalogs are usually either bare-bones
-      spreadsheets or bloated systems built for institutions, not readers. There wasn't a
-      middle ground: something that just shows you what's in the catalog, who wrote it, and
-      what you currently have borrowed, without getting in the way.
+      Reader Library puts the whole collection online. Search by title, author, or ISBN, see
+      exactly how many copies are on the shelf, borrow what you find, and return it when you are
+      done, without standing in a queue.
     </p>
+    <h2>How the collection is organised</h2>
     <p>
-      This build focuses on three things: a catalog that's easy to browse and search, author
-      pages that are built directly from the books that exist (no empty profiles, no manual
-      upkeep), and a simple, honest borrowing flow: pick a book, set a due date, and it shows
-      up in your own list.
+      Every title carries a catalog number, a shelf mark (fiction is shelved by the first three
+      letters of the author's surname), its genre, and publication details. Authors are built
+      directly from the books we hold, so an author page always shows everything of theirs that
+      is in the collection.
     </p>
+    <h2>Borrowing at a glance</h2>
     <p>
-      This is a demonstration project. There's no company behind it, no waitlist, and nothing
-      for sale. It exists to show what a well-considered version of this kind of product could
-      look like, end to end: real authentication, a derived author system, and a design system
-      built for the product rather than borrowed from a template.
+      Members can borrow up to five books at a time, each for up to two weeks, and one copy of any
+      given title. When every copy of a book is out, the book page shows when the next one is due
+      back. See the Terms page for the full lending rules.
     </p>
   </StaticPage>
 );

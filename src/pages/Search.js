@@ -41,7 +41,7 @@ const Search = ({ match }) => {
             <StateBlock
               icon={MagnifyingGlassIcon}
               title="No matches"
-              text={`Nothing in the catalog starts with "${query}". Try a different title.`}
+              text={`Nothing in the catalog matches "${query}". Try a different title, author, or ISBN.`}
             />
           )}
           {!loading && !error && results.length > 0 && (

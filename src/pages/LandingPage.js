@@ -49,32 +49,32 @@ const AnimatedNumber = ({ value, placeholder = '…' }) => {
 const FEATURES = [
   {
     icon: MagnifyingGlassIcon,
-    title: 'Discover with intent',
-    text: 'Browse by genre or search titles directly: a catalog organized around how readers actually decide what to read next.',
+    title: 'Search the whole collection',
+    text: 'Find a book by title, author, or ISBN, or browse the shelves by genre. Every record shows its shelf mark, edition details, and how many copies are in.',
   },
   {
     icon: UserGroupIcon,
-    title: 'Follow the authors, not just the books',
-    text: "Every author page is built from what's actually in the library: see their full body of work in one place.",
+    title: 'Live availability',
+    text: 'See at a glance whether a copy is on the shelf or out on loan, and when the next one is due back, before you make the trip.',
   },
   {
     icon: BookmarkSquareIcon,
-    title: 'One place for what you borrow',
-    text: 'Track due dates and imprints for everything you currently have out, without digging through email confirmations.',
+    title: 'Loans that manage themselves',
+    text: 'Borrow up to five books at a time for up to two weeks. Due dates, overdue notices, and returns all live in one place under My Books.',
   },
 ];
 
 const STEPS = [
-  { title: 'Create an account', text: "Sign up and you're straight in. It takes under a minute." },
-  { title: 'Explore the catalog', text: 'Browse by genre, search by title, or start from an author you already like.' },
-  { title: 'Borrow what you find', text: "Reserve a copy with an imprint and due date, right from the book's page." },
-  { title: 'Keep track as you go', text: 'My Books keeps every current loan, and its due date, in one list.' },
+  { title: 'Join the library', text: 'Create a member account and confirm your email. It takes a couple of minutes.' },
+  { title: 'Find your book', text: 'Search by title, author, or ISBN, or filter to what is available right now.' },
+  { title: 'Borrow it', text: "Pick your due date, up to two weeks out, right from the book's page." },
+  { title: 'Return it', text: 'Return from My Books when you are done, and the copy goes back on the shelf for the next reader.' },
 ];
 
 const VALUES = [
-  { icon: BoltIcon, title: 'Quick to join', text: "Create an account and you're straight in, ready to borrow. No email hoops to jump through first." },
-  { icon: SparklesIcon, title: 'Built on real data', text: 'No filler content. Every book, author, and count on this page comes straight from the live catalog.' },
-  { icon: ClockIcon, title: 'Nothing to install', text: 'Reader runs in the browser. Open a tab and you\'re in your library, on any device.' },
+  { icon: BoltIcon, title: 'Fair lending rules', text: 'Five loans at a time, two weeks per loan, one copy of any title per member. Simple limits that keep every shelf moving.' },
+  { icon: SparklesIcon, title: 'A real catalog', text: 'Real books by real authors, with cover art, ISBNs, and publication details on every record.' },
+  { icon: ClockIcon, title: 'Open around the clock', text: 'Browse, borrow, and return from any device, whenever suits you.' },
 ];
 
 const LandingPage = () => {
@@ -88,8 +88,14 @@ const LandingPage = () => {
 
     api.get('/?page=1').then((data) => {
       if (cancelled) return;
-      setShowcaseBooks((data.results || []).slice(0, 3));
+      const withCovers = (data.results || []).filter((b) => b.cover_url);
+      setShowcaseBooks((withCovers.length >= 3 ? withCovers : data.results || []).slice(0, 3));
       setStats((s) => ({ ...s, books: data.count }));
+    }).catch(() => {});
+
+    api.get('/genres/').then((data) => {
+      if (cancelled) return;
+      setStats((s) => ({ ...s, genres: data.length }));
     }).catch(() => {});
 
     api.get('/author/').then((data) => {
@@ -138,13 +144,13 @@ const LandingPage = () => {
           <div className="container">
             <div className="hero-grid">
               <div>
-                <span className="eyebrow">A calmer way to manage your reading</span>
+                <span className="eyebrow">Your library, online</span>
                 <h1 className="hero-heading">
-                  Your reading life,<br /><em>finally organized.</em>
+                  Find it on the shelf,<br /><em>borrow it in a minute.</em>
                 </h1>
                 <p className="hero-subtext">
-                  Reader brings discovery, authors, and everything you've borrowed into one
-                  well-organized place, so the next book is never more than a search away.
+                  Search the whole collection, see what is available right now, borrow for up to
+                  two weeks, and keep track of every due date, all in one place.
                 </p>
                 <div className="hero-cta-row">
                   <button className="btn btn-primary btn-lg" onClick={() => history.push('/signup')}>
@@ -157,15 +163,15 @@ const LandingPage = () => {
                 <div className="hero-meta-row">
                   <div className="hero-meta-item">
                     <span className="hero-meta-num"><AnimatedNumber value={stats.books} /></span>
-                    <span className="hero-meta-label">Books in the catalog</span>
+                    <span className="hero-meta-label">Titles in the catalog</span>
                   </div>
                   <div className="hero-meta-item">
                     <span className="hero-meta-num"><AnimatedNumber value={stats.authors} /></span>
-                    <span className="hero-meta-label">Authors represented</span>
+                    <span className="hero-meta-label">Authors on the shelves</span>
                   </div>
                   <div className="hero-meta-item">
-                    <span className="hero-meta-num">9</span>
-                    <span className="hero-meta-label">Genres to explore</span>
+                    <span className="hero-meta-num"><AnimatedNumber value={stats.genres} /></span>
+                    <span className="hero-meta-label">Genres to browse</span>
                   </div>
                 </div>
               </div>
@@ -197,8 +203,8 @@ const LandingPage = () => {
           <div className="container">
             <div className="section-head center reveal">
               <span className="eyebrow" style={{ justifyContent: 'center' }}>What Reader does</span>
-              <h2>Everything a library catalog should have been</h2>
-              <p>Three things, done properly, instead of ten things done halfway.</p>
+              <h2>A catalog built for borrowing</h2>
+              <p>Everything you need to find a book, take it home, and bring it back.</p>
             </div>
             <div className="feature-grid">
               {FEATURES.map((f, i) => (
@@ -217,7 +223,7 @@ const LandingPage = () => {
           <div className="container">
             <div className="section-head reveal">
               <span className="eyebrow">How it works</span>
-              <h2>From sign-up to your next book, in four steps</h2>
+              <h2>From membership to your next read, in four steps</h2>
             </div>
             <div className="steps-row">
               {STEPS.map((step, i) => (
@@ -235,8 +241,8 @@ const LandingPage = () => {
         <section className="section" id="about">
           <div className="container">
             <div className="section-head center reveal">
-              <span className="eyebrow" style={{ justifyContent: 'center' }}>Why it holds together</span>
-              <h2>Small, deliberate choices instead of empty promises</h2>
+              <span className="eyebrow" style={{ justifyContent: 'center' }}>How lending works</span>
+              <h2>Simple rules that keep the shelves moving</h2>
             </div>
             <div className="values-grid">
               {VALUES.map((v, i) => (
@@ -254,8 +260,8 @@ const LandingPage = () => {
         <section className="section">
           <div className="container">
             <div className="final-cta reveal">
-              <h2>Your next book is already in the catalog.</h2>
-              <p>Create an account and find it.</p>
+              <h2>Your next book is on the shelf.</h2>
+              <p>Join the library and borrow it today.</p>
               <div className="hero-cta-row">
                 <button className="btn btn-primary btn-lg" onClick={() => history.push('/signup')}>
                   Create your account

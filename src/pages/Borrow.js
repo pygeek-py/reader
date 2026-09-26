@@ -9,7 +9,7 @@ import { api } from '../api/client';
 import { useAuth } from '../context/AuthContext';
 import LinkButton from '../components/LinkButton';
 
-const MAX_ACTIVE_LOANS = 5;
+import { MAX_ACTIVE_LOANS, MAX_LOAN_DAYS } from '../constants';
 
 // Building the string from local date parts (not toISOString, which converts to
 // UTC first) avoids the date silently shifting by one near midnight in timezones
@@ -21,7 +21,7 @@ const toDateInputValue = (date) => {
   return `${year}-${month}-${day}`;
 };
 const TODAY = toDateInputValue(new Date());
-const TWO_WEEKS_OUT = toDateInputValue(new Date(Date.now() + 14 * 24 * 60 * 60 * 1000));
+const TWO_WEEKS_OUT = toDateInputValue(new Date(Date.now() + MAX_LOAN_DAYS * 24 * 60 * 60 * 1000));
 
 const Borrow = ({ match }) => {
   const { user } = useAuth();
@@ -58,10 +58,7 @@ const Borrow = ({ match }) => {
     setSubmitting(true);
     setError(null);
     try {
-      await api.post('/borrow/', {
-        title: book.title, name: book.name, description: book.description,
-        genre: book.genre, num: book.num, imprint, due, cover_url: book.cover_url,
-      }, { auth: true });
+      await api.post('/borrow/', { num: book.num, imprint, due }, { auth: true });
       history.push('/library/mine');
     } catch (err) {
       setError(err.message);
@@ -137,11 +134,11 @@ const Borrow = ({ match }) => {
 
           <form onSubmit={submit}>
             <div className="field">
-              <label className="field-label" htmlFor="imprint">Imprint / edition</label>
+              <label className="field-label" htmlFor="imprint">Edition</label>
               <input
                 id="imprint"
                 className="input"
-                placeholder="e.g. First Edition, Penguin Classics"
+                placeholder="e.g. Paperback, Hardcover, Large print"
                 value={imprint}
                 onChange={(e) => setImprint(e.target.value)}
                 required
@@ -159,7 +156,7 @@ const Borrow = ({ match }) => {
                 onChange={(e) => setDue(e.target.value)}
                 required
               />
-              <span className="field-hint">Loans can run up to two weeks.</span>
+              <span className="field-hint">Loans run for up to two weeks. You can have up to five books out at once.</span>
             </div>
             <button type="submit" className="btn btn-primary btn-lg" style={{ marginTop: 24 }} disabled={submitting || !book}>
               {submitting ? 'Submitting…' : 'Confirm borrow'}
